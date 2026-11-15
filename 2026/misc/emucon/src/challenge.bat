@@ -1,0 +1,1 @@
+python .\generate_challenge.py 1920 "EMU{REDACTED}" --gen-ahk --interactive

@@ -1,0 +1,35 @@
+data:
+  name: xss-bot
+  category: web
+  tags:
+    - insane
+  author: mc fat monke
+  description: |
+    I have messed up one xss bot before, I ain't doing it again... So I asked AI to make a secure XSS bot
+
+    **WARNING**
+
+    Contains flashing colours. Add `?boring=1` to the end of your URL to disable.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{0OooooHHH_n00oOooO0_i_g00oF3D_uP_4g1N!!!}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  instancerConfig:
+    challengeIntegrationId: xss-bot
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: http
+        hostPrefix: xss-bot
+        containerName: app
+        containerPort: 8080
+        shouldDisplay: true
+        title: Open challenge
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

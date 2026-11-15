@@ -1,0 +1,21 @@
+static: true
+data:
+  name: door1
+  category: phys
+  tags:
+    - medium
+  author: evildaemond
+  description: |
+    We recently added a new exit to our headquarters of EMU Industries. This door is an external door with a door jamb, so people cant jimmy the door open, take that hackers. 
+    You get the flag if you show us you getting through the door by loiding it, it's marked by "EXIT".  
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{door-the-planet}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

@@ -1,0 +1,23 @@
+static: true
+data:
+  name: corporate
+  category: misc
+  tags:
+    - easy
+  author: torry2
+  description: |
+    Emu Industries is open for business.
+
+    > [!CONNECTION]
+    > https://corporate.chal.ctf.emu.team
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{pl4ase_suBm1t_JIR4_t1ck3t!}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

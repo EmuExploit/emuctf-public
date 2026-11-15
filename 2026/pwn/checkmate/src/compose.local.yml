@@ -1,0 +1,13 @@
+services:
+  chal:
+    build: .
+    platform: linux/amd64
+    ports:
+      - "${PORT:-10000}:1337"
+    container_name: checkmate-local
+    restart: unless-stopped
+    init: true
+    privileged: true
+    mem_limit: 768m
+    pids_limit: 128
+    cpus: 2

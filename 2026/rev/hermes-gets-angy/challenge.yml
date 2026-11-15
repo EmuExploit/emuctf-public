@@ -1,0 +1,20 @@
+static: true
+data:
+  name: hermes-gets-angy
+  category: rev
+  tags:
+    - hard
+  author: nullableVoidPtr
+  description: |
+    How'd you break the VM?? Screw it, I'll just lower it to C!!
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{y0u_c4n_b1nj4_bu7_g00d_luck_h0n357ly}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

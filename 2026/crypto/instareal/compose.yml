@@ -1,0 +1,45 @@
+services:
+  app:
+    image: ${REGISTRY}/instareal:latest
+    build:
+      context: ./src
+    environment:
+      flag: ${FLAG}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - internal
+    expose:
+      - "8080"
+    read_only: true
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 128
+
+  mongo:
+    image: mongo:8.0
+    user: "999:999"
+    command: "mongod --bind_ip_all --wiredTigerCacheSizeGB 0.25"
+    tmpfs:
+      /data/db: "rw,uid=999,gid=999,mode=0700"
+      /data/configdb: "rw,uid=999,gid=999,mode=0700"
+      /tmp: "rw,mode=1777"
+    environment:
+      HOME: /tmp
+    networks:
+      - internal
+    expose:
+      - "27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    mem_limit: 512m
+    cpus: 0.5
+    pids_limit: 128
+
+networks:
+  internal:
+    internal: true

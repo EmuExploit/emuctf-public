@@ -1,0 +1,28 @@
+static: true
+data:
+  name: whats-the-hold-up
+  category: forensics
+  tags:
+    - hard
+  author: Div
+  description: |
+    Our General Manager toasterpwn is sweating! That busted Wattle Creek
+    Copper drive left a loaded container stranded on the dock. The
+    dispatch-audit looks okay, but now it's stuck at the gate-control going
+    nowhere. Dig through the paper trail and find the release reference ID
+    before EMU Industries' stock price tanks.
+
+    Download the capture: https://drive.google.com/file/d/14Y1dlLn6S30tBfe-35-RMp50GZSOnjaD/view?usp=sharing
+
+    Submit: EMU{release_reference}
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{EXPORT_HELD_FOR_REVIEW_A63F09B2}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 50
+  hidden: false
+  releaseTime: null

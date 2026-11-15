@@ -1,0 +1,20 @@
+data:
+  name: babykernel
+  category: pwn
+  author: toasterpwn
+  description: |
+    A little kernel goes a long way. Creds are `ctf:ctf`.
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{kernelkernelkernel}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

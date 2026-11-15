@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Submission result / Emu Industries</title>
+  </head>
+  <body>
+    <main>
+      {% if result %}
+        <h1>{{ 'Rejected' if result.outcome == 'rejected' else 'Email Delivered' }}</h1>
+        <p>{{ result.message }}</p>
+        <p>Reference: {{ result.id }}</p>
+        <p>
+          Email: {{ result.scores.email }} · Attachment: {{ result.scores.attachment }} · Combined: {{ result.scores.combined }}
+        </p>
+        <ul>
+          {% for signal in result.signals %}<li>{{ signal.label }}: +{{ signal.points }}</li>{% endfor %}
+        </ul>
+        <p>Copy this result now to keep it.</p>
+      {% else %}
+        <h1>Submission not accepted</h1>
+        <p>{{ message }}</p>
+      {% endif %}
+      <a href="{{ platform_url }}">Return to the platform</a>
+    </main>
+  </body>
+</html>

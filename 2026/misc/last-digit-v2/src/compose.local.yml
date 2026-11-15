@@ -1,0 +1,15 @@
+name: last-digit-v2
+
+services:
+  chal:
+    image: last-digit-v2-local
+    build: .
+    platform: linux/amd64
+    ports:
+      - "${PORT:-10000}:1337"
+    container_name: last-digit-v2-local
+    restart: unless-stopped
+    init: true
+    mem_limit: 768m
+    pids_limit: 128
+    cpus: 2

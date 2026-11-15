@@ -1,0 +1,118 @@
+{{ define "body_class" }}app-layout{{ end }}
+
+<nav>
+  <a class="nav-brand" href="/user/me">DuckDuckGo</a>
+  <div class="nav-links">
+    <a href="/user/me">Profile</a>
+    <a href="/scans">Scans</a>
+    <a href="/scans/settings" class="active">Settings</a>
+    <a href="/logout" class="nav-logout">Sign Out</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>Scan Settings</h1>
+    <p>Configure defaults applied to every new scan.</p>
+  </div>
+
+  {{if .Flash}}
+  <div class="flash">{{.Flash}}</div>
+  {{end}}
+
+  {{if .Errors}}
+  <ul class="errors">
+    {{if eq (printf "%T" .Errors) "string"}}
+      <li>{{.Errors}}</li>
+    {{else}}
+      {{range .Errors}}<li>{{.}}</li>{{end}}
+    {{end}}
+  </ul>
+  {{end}}
+
+  <form method="POST" action="/scans/settings">
+    <div class="section">
+      <div class="section-title">Output</div>
+      <div class="field">
+        <label for="database_suffix">Database Suffix</label>
+        <input type="text" id="database_suffix" name="database_suffix"
+          value="{{.Settings.DatabaseSuffix}}" placeholder="_output">
+        <p class="hint">Appended to the generated SQLite database filename.</p>
+      </div>
+      <div class="field">
+        <label for="table_prefix">Table Prefix</label>
+        <input type="text" id="table_prefix" name="table_prefix"
+          value="{{.Settings.TablePrefix}}" placeholder="ddg_">
+        <p class="hint">Prepended to every table name inside the database.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Bad Words Filter</div>
+      <p style="font-size:0.875rem;color:var(--ink-soft);margin-bottom:1rem;">
+        Scans flag pages whose content contains any of these words.
+      </p>
+
+      <!-- live tag display -->
+      <div class="tag-list" id="tag-list">
+        {{range .BadWords}}
+        <span class="tag">
+          {{.}}
+          <button type="button" onclick="removeTag(this, '{{.}}')" title="Remove">×</button>
+        </span>
+        {{end}}
+      </div>
+
+      <!-- hidden inputs mirror the current list -->
+      <div id="hidden-inputs">
+        {{range .BadWords}}
+        <input type="hidden" name="badwords" value="{{.}}">
+        {{end}}
+      </div>
+
+      <div style="display:flex;gap:0.6rem;margin-top:0.75rem;">
+        <input type="text" id="new-word" placeholder="Add a word…" style="max-width:240px;">
+        <button type="button" class="btn btn-ghost" onclick="addTag()">Add</button>
+      </div>
+      <p class="hint" style="margin-top:0.5rem;">Press Add or hit Enter to append a word to the list.</p>
+    </div>
+
+    <button class="btn" type="submit">Save Settings</button>
+  </form>
+</main>
+
+<script>
+  const input = document.getElementById('new-word');
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addTag(); } });
+
+  function addTag() {
+    const val = input.value.trim();
+    if (!val) return;
+
+    // avoid duplicates
+    const existing = [...document.querySelectorAll('#hidden-inputs input')].map(i => i.value);
+    if (existing.includes(val)) { input.value = ''; return; }
+
+    // visual tag
+    const tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.innerHTML = `${val} <button type="button" onclick="removeTag(this,'${val}')" title="Remove">×</button>`;
+    document.getElementById('tag-list').appendChild(tag);
+
+    // hidden input
+    const hidden = document.createElement('input');
+    hidden.type = 'hidden';
+    hidden.name = 'badwords';
+    hidden.value = val;
+    document.getElementById('hidden-inputs').appendChild(hidden);
+
+    input.value = '';
+  }
+
+  function removeTag(btn, val) {
+    btn.closest('.tag').remove();
+    document.querySelectorAll('#hidden-inputs input').forEach(i => {
+      if (i.value === val) i.remove();
+    });
+  }
+</script>

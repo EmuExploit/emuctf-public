@@ -1,0 +1,42 @@
+data:
+  name: gimme-ya-claude
+  category: web
+  tags:
+    - insane
+  author: mc fat monke
+  description: |
+    I made a super convincing phishing site to steal peoples Claude access.
+
+    No one expects sending environment variables to be malicious ;)
+
+    **WARNING**
+
+    **DO NOT SEND ANY LEGITIMATE CLAUDE CREDENTIALS/TOKENS/API KEYS**
+
+    They are not needed to solve this challenge.
+
+    > [!WARNING]
+    > Solve locally before attempting remote
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{g01nG_ofF_d3r_r41l5_m1t_lD_pR3L04d!!one111!1}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  instancerConfig:
+    challengeIntegrationId: gimme-ya-claude
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: http
+        hostPrefix: gimme-ya-claude
+        containerName: app
+        containerPort: 8080
+        shouldDisplay: true
+        title: gimme-ya-claude
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

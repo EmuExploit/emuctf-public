@@ -1,0 +1,26 @@
+data:
+  name: last-digit-v2
+  category: misc
+  tags:
+    - medium
+  author: TheSavageTeddy
+
+  description: |
+    i liked [last digit](https://github.com/DownUnderCTF/Challenges_2022_Public/tree/main/misc/last-digit) so i made a v2
+
+    Author: TheSavageTeddy
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{1_r34lly_h0p3_ai-d03sn7_0n3_sh0t_th1s_ctf_challenge_because_otherwise_i_will_be_very_sad_:<}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

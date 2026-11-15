@@ -1,0 +1,23 @@
+static: true
+data:
+  name: decode2
+  category: phys
+  tags:
+    - medium
+  author: evildaemond
+  description: |
+    Our new EMU Industries headquarters was just rekeyed so nobody who use to have keys can get in. Can't let those vagrant hackers in anymore.
+    We just gave out our new building key to a few of our staff, who are proud of our companies commitment to security and will be walking around with the keys
+
+    The flag is the keys bitting wrapped in the EMU{......}, for example, EMU{133767}
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{361232}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

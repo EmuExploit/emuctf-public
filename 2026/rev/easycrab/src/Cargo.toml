@@ -1,0 +1,9 @@
+[package]
+name = "easycrab"
+version = "0.1.0"
+
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 0

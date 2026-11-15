@@ -1,0 +1,640 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #171a1f;
+    background-image: none; /* Default background image */
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-x: hidden;
+}
+
+#chaoszone { display: none; }
+
+body.unleashed {
+    cursor: url("/assets/monke9.jpg"), auto;
+    animation: huejuice 3s linear infinite, screenquake 0.12s infinite, bgcycle 5s ease-in-out infinite;
+}
+
+body.unleashed #chaoszone { display: block; }
+
+@keyframes bgcycle {
+    0% { background-color: #2a003f; }
+    20% { background-color: #003f3a; }
+    40% { background-color: #3f0030; }
+    60% { background-color: #063f00; }
+    80% { background-color: #3f2a00; }
+    100% { background-color: #2a003f; }
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(42vw, 12vh) rotate(90deg); }
+    50% { transform: translate(72vw, 44vh) rotate(180deg); }
+    75% { transform: translate(18vw, 70vh) rotate(270deg); }
+    100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes megaspin { to { transform: rotate(360deg); } }
+
+@keyframes bannerblink { 50% { opacity: 0.12; } }
+
+@keyframes scrollleft {
+    from { transform: translateX(100vw); }
+    to { transform: translateX(-130%); }
+}
+
+@keyframes scrollright {
+    from { transform: translateX(-130%); }
+    to { transform: translateX(100vw); }
+}
+
+@keyframes wobbletext {
+    0%, 100% { transform: skew(0deg) scale(1); }
+    25% { transform: skew(9deg) scale(1.12); }
+    75% { transform: skew(-9deg) scale(0.92); }
+}
+
+.floaty {
+    position: fixed;
+    top: 10vh;
+    left: 5vw;
+    width: 150px;
+    z-index: 5;
+    opacity: 0.9;
+    pointer-events: none;
+    animation: drift 9s linear infinite;
+}
+.floaty.f2 { animation-duration: 13s; animation-direction: reverse; width: 110px; top: 40vh; left: 60vw; }
+.floaty.f3 { animation-duration: 7s; width: 190px; top: 65vh; left: 25vw; }
+.floaty.f4 { animation-duration: 17s; width: 130px; top: 20vh; left: 75vw; }
+.floaty.f5 { animation-duration: 11s; animation-direction: reverse; width: 160px; top: 55vh; left: 10vw; }
+
+.seal {
+    position: fixed;
+    top: 14px;
+    right: 14px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: conic-gradient(red, orange, yellow, lime, cyan, blue, magenta, red);
+    color: #000;
+    font-family: "Comic Sans MS", cursive;
+    font-weight: bold;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 99999;
+    pointer-events: none;
+    box-shadow: 0 0 30px 10px gold, 0 0 60px 20px magenta;
+    animation: megaspin 2s linear infinite;
+}
+
+.scroller {
+    position: fixed;
+    left: 0;
+    width: 100vw;
+    white-space: nowrap;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 34px;
+    font-weight: bold;
+    z-index: 99998;
+    pointer-events: none;
+    text-shadow: 3px 3px 0 #000, -2px -2px 0 red;
+}
+.scroller.top { top: 0; color: #00ff00; animation: scrollleft 8s linear infinite; }
+.scroller.bottom { bottom: 0; color: #ff00ff; animation: scrollright 11s linear infinite; }
+
+.warnbanner {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    width: 100vw;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 28px;
+    font-weight: bold;
+    color: #fff;
+    background: repeating-linear-gradient(45deg, #000 0 20px, #ffcc00 20px 40px);
+    z-index: 99997;
+    pointer-events: none;
+    animation: bannerblink 0.6s steps(1) infinite;
+}
+
+marquee {
+    position: relative;
+    z-index: 99996;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff0000;
+    text-shadow: 2px 2px 0 lime, -2px -2px 0 cyan;
+}
+
+.stormmonke {
+    position: fixed;
+    pointer-events: none;
+    opacity: 0.85;
+    will-change: transform;
+}
+
+.bgvid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -20;
+    opacity: 0.5;
+    mix-blend-mode: screen;
+    animation: huejuice 2s linear infinite;
+}
+
+@keyframes spinwarp {
+    0% { transform: rotate(0deg) scale(0.5); }
+    50% { transform: rotate(180deg) scale(1.9); }
+    100% { transform: rotate(360deg) scale(0.5); }
+}
+
+#removeButton {
+    position: fixed;
+    top: 40%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: max-content;
+    max-width: 92vw;
+    z-index: 100000;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 42px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    padding: 28px 56px;
+    color: #ffffff;
+    background: #ff1493;
+    border: 10px solid #00ff00;
+    border-radius: 18px;
+    text-shadow: 3px 3px 0 #000;
+    cursor: pointer;
+    animation: wobble 0.5s infinite, glowpulse 0.8s ease-in-out infinite;
+}
+
+@keyframes glowpulse {
+    0%, 100% { box-shadow: 0 0 0 10px #000, 0 0 40px 18px #00ffff; }
+    50% { box-shadow: 0 0 0 16px #000, 0 0 100px 50px #ff00ff; }
+}
+
+@keyframes huejuice {
+    0% { filter: hue-rotate(0deg) saturate(3); }
+    100% { filter: hue-rotate(360deg) saturate(3); }
+}
+
+@keyframes screenquake {
+    0% { transform: translate(0px, 0px) skew(0deg); }
+    20% { transform: translate(-4px, 3px) skew(1deg); }
+    40% { transform: translate(5px, -2px) skew(-1deg); }
+    60% { transform: translate(-3px, -4px) skew(0.5deg); }
+    80% { transform: translate(4px, 2px) skew(-0.5deg); }
+    100% { transform: translate(0px, 0px) skew(0deg); }
+}
+
+.container {
+    text-align: center;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #c2c549;
+    color: #171a1f;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+    animation: wobble 0.4s infinite, huejuice 1s linear infinite;
+}
+
+@keyframes wobble {
+    0% { transform: rotate(-6deg) scale(1); }
+    50% { transform: rotate(6deg) scale(1.3); }
+    100% { transform: rotate(-6deg) scale(1); }
+}
+
+#logo {
+    height: auto;
+    margin-bottom: 20px;
+   /* Adds spacing between the image and button */
+}
+.meme {
+    text-align: center;
+    display: none;
+}
+.monkes{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 250px;
+    animation-name: zoom;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.meme img {
+    display: block;
+    margin: 0 auto;
+}
+h1.hometown{
+    color: wheat;
+}
+img {
+    max-width: 100%;
+    max-height: 100%;
+    z-index: 0;
+}
+.rainbow {
+    text-align: center;
+    text-decoration: underline wavy magenta;
+    font-size: 55px;
+    font-family: "Comic Sans MS", "Comic Sans", monospace;
+    letter-spacing: 5px;
+    z-index: 1000;
+    text-shadow: 3px 3px 0 lime, -3px -3px 0 red, 0 0 20px cyan;
+}
+.rainbow_text_animated {
+    background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite, blinkblink 0.3s step-end infinite;
+    background-size: 400% 100%;
+    z-index: 1000;
+}
+.rainbow_text_animated:hover {
+    font-size: 60px;
+   /* You can adjust the size as needed */
+}
+@keyframes blinkblink {
+    0% { opacity: 1; }
+    50% { opacity: 0.25; }
+    100% { opacity: 1; }
+}
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+   }
+    50% {
+        background-position: 100% 0;
+   }
+}
+@keyframes moveImage {
+    0% {
+        transform: translate(0, 0);
+   }
+    25% {
+        transform: translate(1600px, 0);
+   }
+    50% {
+        transform: translate(1600px, 750px);
+   }
+    75% {
+        transform: translate(0, 750px);
+   }
+    100% {
+        transform: translate(0, 0);
+   }
+}
+/* Apply the animation to the image */
+.monek1 {
+    animation: moveImage 2s linear infinite;
+}
+.monek2 {
+    animation: moveImage 8s linear infinite;
+}
+.monek3 {
+    animation: moveImage 7s linear infinite;
+}
+.monek4 {
+    animation: moveImage 6s linear infinite;
+}
+.monek5 {
+    animation: moveImage 5s linear infinite;
+}
+.monek6 {
+    animation: moveImage 4s linear infinite;
+}
+.monek7 {
+    animation: moveImage 3s linear infinite;
+}
+.monek8 {
+    animation: moveImage 7s linear infinite;
+}
+.monek9 {
+    animation: moveImage 2s linear infinite;
+}
+.monek10 {
+    animation: moveImage 8.5s linear infinite;
+}
+
+.monek11 {
+    animation: moveImage 5.5s linear infinite;
+}
+
+.monek12 {
+    animation: moveImage 2s linear infinite;
+}
+
+
+
+.musicmonke {
+    animation: zoom-in-zoom-out 0.65s ease infinite;
+}
+@keyframes zoom-in-zoom-out {
+    0% {
+        transform: scale(1, 1);
+   }
+    50% {
+        transform: scale(2, 1.5);
+   }
+    100% {
+        transform: scale(1, 1);
+   }
+}
+
+
+
+.rotate {
+    animation: rotation 2s infinite linear;
+  }
+
+  @keyframes rotation {
+    0% {
+        transform: translate(0, 1300px);
+   }
+    100% {
+        transform: translate(300px, 0);
+   }
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+
+  .msp1{
+    top: 50%;
+    right: 10%;
+    position: fixed;
+    transform: translate(0, 50%);
+    width: 250px;
+}
+
+
+.msp2{
+    top: 40%;
+    left: 10%;
+    position: fixed;
+    transform: translate(0, -50%);
+    width: 250px;
+}
+
+.msp3{
+    top: 60%;
+    left: 20%;
+    position: fixed;
+    transform: translate(0, -50%);
+    width: 250px;
+}
+
+.msp4{
+    top: 50%;
+    left: 50%;
+    position: fixed;
+    transform: translate(-50%, 50%);
+    width: 500px;
+}
+
+.msp5{
+    top: 30%;
+    right: 10%;
+    position: fixed;
+    transform: translate(-50%, 50%);
+    width: 200px;
+}
+
+
+.msp6{
+    top: 70%;
+    left: 10%;
+    position: fixed;
+    transform: translate(50%, -50%);
+    width: 200px;
+}
+
+
+@keyframes firework {
+    0% { transform: translate(var(--x), var(--initialY)); width: var(--initialSize); opacity: 1; }
+    50% { width: 0.5vmin; opacity: 1; }
+    100% { width: var(--finalSize); opacity: 0; }
+  }
+
+  .firework,
+  .firework::before,
+  .firework::after
+  {
+    --initialSize: 1vmin;
+    --finalSize: 100vmin;
+    --particleSize: 10vmin;
+    --color1: yellow;
+    --color2: khaki;
+    --color3: white;
+    --color4: lime;
+    --color5: gold;
+    --color6: mediumseagreen;
+    --y: -30vmin;
+    --x: -50%;
+    --initialY: 60vmin;
+    content: "";
+    animation: firework 2s infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, var(--y));
+    width: var(--initialSize);
+    aspect-ratio: 1;
+    background:
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
+      radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
+      radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 50% 100%,
+      radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 0% 50%,
+
+      radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 80% 90%,
+      radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 95% 90%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 90% 70%,
+      radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 60%,
+      radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 55% 80%,
+      radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 70% 77%,
+
+      radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 22% 90%,
+      radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 45% 90%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 33% 70%,
+      radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 10% 60%,
+      radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 31% 80%,
+      radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 28% 77%,
+      radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 13% 72%,
+
+      radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 80% 10%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 95% 14%,
+      radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 90% 23%,
+      radial-gradient(circle, var(--color3) var(--particleSize), #0000 0) 100% 43%,
+      radial-gradient(circle, var(--color4) var(--particleSize), #0000 0) 85% 27%,
+      radial-gradient(circle, var(--color5) var(--particleSize), #0000 0) 77% 37%,
+      radial-gradient(circle, var(--color6) var(--particleSize), #0000 0) 60% 7%,
+
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 22% 14%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 45% 20%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 33% 34%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 10% 29%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 31% 37%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 28% 7%,
+      radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 13% 42%
+      ;
+    background-size: var(--initialSize) var(--initialSize);
+    background-repeat: no-repeat;
+  }
+
+  .firework::before {
+    --x: -50%;
+    --y: -50%;
+    --initialY: -50%;
+    transform: translate(-50%, -50%) rotate(40deg) scale(1.3) rotateY(40deg);
+  }
+
+  .firework::after {
+    --x: -50%;
+    --y: -50%;
+    --initialY: -50%;
+    transform: translate(-50%, -50%) rotate(170deg) scale(1.15) rotateY(-30deg);
+  }
+
+  .firework:nth-child(2) {
+    --x: 30vmin;
+  }
+
+  .firework:nth-child(2),
+  .firework:nth-child(2)::before,
+  .firework:nth-child(2)::after {
+    --color1: pink;
+    --color2: violet;
+    --color3: fuchsia;
+    --color4: orchid;
+    --color5: plum;
+    --color6: lavender;
+    --finalSize: 40vmin;
+    left: 30%;
+    top: 60%;
+    animation-delay: -0.25s;
+  }
+
+  .firework:nth-child(3) {
+    --x: -30vmin;
+    --y: -50vmin;
+  }
+
+  .firework:nth-child(3),
+  .firework:nth-child(3)::before,
+  .firework:nth-child(3)::after {
+    --color1: cyan;
+    --color2: lightcyan;
+    --color3: lightblue;
+    --color4: PaleTurquoise;
+    --color5: SkyBlue;
+    --color6: lavender;
+    --finalSize: 35vmin;
+    left: 70%;
+    top: 60%;
+    animation-delay: -0.4s;
+  }
+
+
+  @-webkit-keyframes rotating /* Safari and Chrome */ {
+    from {
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes rotating {
+    from {
+      -ms-transform: rotate(0deg);
+      -moz-transform: rotate(0deg);
+      -webkit-transform: rotate(0deg);
+      -o-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    to {
+      -ms-transform: rotate(360deg);
+      -moz-transform: rotate(360deg);
+      -webkit-transform: rotate(360deg);
+      -o-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  .rotating {
+    -webkit-animation: rotating 2s linear infinite;
+    -moz-animation: rotating 2s linear infinite;
+    -ms-animation: rotating 2s linear infinite;
+    -o-animation: rotating 2s linear infinite;
+    animation: rotating 2s linear infinite;
+  }
+
+video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.botbox {
+    position: relative;
+    z-index: 99999;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, #ff00ff 0 20px, #00ff00 20px 40px);
+    padding: 20px;
+    border: 8px ridge gold;
+    box-shadow: 0 0 0 6px red, 0 0 0 12px lime, 0 0 40px 20px magenta;
+    transform: rotate(-2deg);
+}
+.botbox input[type=url] {
+    width: 90%;
+    padding: 12px;
+    font-size: 22px;
+    font-family: "Comic Sans MS", cursive;
+    border: 5px dashed red;
+    background: yellow;
+    color: #ff00ff;
+    box-sizing: border-box;
+}
+.msg {
+    position: relative;
+    z-index: 99999;
+    font-family: "Comic Sans MS", cursive;
+    font-size: 30px;
+    color: #00ff00;
+    text-shadow: 2px 2px 0 red, -2px -2px 0 blue;
+    background: black;
+    padding: 10px;
+    border: 4px dotted cyan;
+}

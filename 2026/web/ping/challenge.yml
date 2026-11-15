@@ -1,0 +1,31 @@
+data:
+  name: ping
+  category: web
+  tags:
+    - beginner
+  author: toasterpwn
+  description: |
+    Create a web challenge, make no mistakes.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{p1ng_1nput_n3v3r_tru5t5_y0u}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  instancerConfig:
+    challengeIntegrationId: ping
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: http
+        hostPrefix: ping
+        containerName: app
+        containerPort: 8080
+        shouldDisplay: true
+        title: Ping
+  sortWeight: 20
+  hidden: false
+  releaseTime: null

@@ -1,0 +1,42 @@
+<div class="form-section">
+  {% if message %}<p class="notice" role="alert">{{ message }}</p>{% endif %}
+  {% if errors %}<p class="notice" role="alert">Please check the fields below.</p>{% endif %}
+  <form method="post" action="{{ url_for('index', _anchor='contact') }}">
+    <div class="field">
+      <label for="name">Full name</label>
+      <input id="name"
+             name="name"
+             autocomplete="name"
+             maxlength="120"
+             value="{{ values.name }}"
+             required
+             {% if errors.name %}aria-invalid="true" aria-describedby="name-error"{% endif %}>
+      {% if errors.name %}<p id="name-error" class="field-error">{{ errors.name }}</p>{% endif %}
+    </div>
+    <div class="field">
+      <label for="email">Corporate email</label>
+      <input id="email"
+             name="email"
+             type="email"
+             autocomplete="email"
+             maxlength="254"
+             value="{{ values.email }}"
+             required
+             {% if errors.email %}aria-invalid="true" aria-describedby="email-error"{% endif %}>
+      {% if errors.email %}<p id="email-error" class="field-error">{{ errors.email }}</p>{% endif %}
+    </div>
+    <div class="field">
+      <label for="message">How can we move the needle?</label>
+      <textarea id="message"
+                name="message"
+                rows="4"
+                maxlength="4000"
+                required
+                {% if errors.message %} aria-invalid="true" aria-describedby="message-error"{% endif %}>{{ values.message }}</textarea>
+      {% if errors.message %}
+        <p id="message-error" class="field-error">{{ errors.message }}</p>
+      {% endif %}
+    </div>
+    <button type="submit">Send enquiry ↗</button>
+  </form>
+</div>

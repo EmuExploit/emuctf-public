@@ -1,0 +1,35 @@
+data:
+  name: integrated
+  category: web
+  tags:
+    - medium
+  author: mc fat monke
+  description: |
+    We heard that members of Emu Exploit will be attending BSides Perth this year.
+
+    To inform the general public, we have provided access to Interpol's internal criminal registry through a *secure* website.
+    
+    We have also fixed a security vulnerability that some of the Emu Exploit members hacked... just adding years on their eventual sentence...
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{tH4Nk_U_N000000000d3_4_bYp4551NG_Ai_wAf5!1!!1ONE1!1111!}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  instancerConfig:
+    challengeIntegrationId: integrated
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: http
+        hostPrefix: integrated
+        containerName: app
+        containerPort: 8080
+        shouldDisplay: true
+        title: Open challenge
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

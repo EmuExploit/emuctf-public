@@ -1,0 +1,262 @@
+name: ${COMPOSE_PROJECT_NAME:-corporate}
+
+x-python: &python
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: [no-new-privileges:true]
+  init: true
+  tmpfs: [/tmp]
+  cpus: 1.0
+  pids_limit: 256
+  mem_limit: 256m
+  restart: "on-failure:3"
+  logging: &logging
+    driver: local
+    options:
+      max-size: 10m
+      max-file: "5"
+
+services:
+  caddy:
+    image: caddy:2.10.2-alpine
+    restart: "on-failure:3"
+    ports: ["${HTTP_BIND:-80}:${HTTP_PORT:-80}", "${HTTPS_BIND:-443}:443"]
+    environment:
+      SITE_ADDRESS: ${SITE_ADDRESS:?Set SITE_ADDRESS in solve/deploy/.env}
+      UPLOAD_SITE_ADDRESS: ${UPLOAD_SITE_ADDRESS:?Set UPLOAD_SITE_ADDRESS in solve/deploy/.env}
+      REVIEW_SITE_ADDRESS: ${REVIEW_SITE_ADDRESS:-https://review.corporate.ctf.emu.team}
+      AUTH_MODE: ${AUTH_MODE:-enabled}
+      BASIC_AUTH_USER: ${BASIC_AUTH_USER:-tester}
+      BASIC_AUTH_HASH: ${BASIC_AUTH_HASH:-}
+    healthcheck:
+      test: [CMD, wget, -q, -O, /dev/null, 'http://127.0.0.1:2019/config/']
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/logs
+    networks: [edge, proxy_frontend, proxy_support, proxy_review, proxy_chat]
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 128
+    logging: *logging
+    depends_on:
+      frontend: {condition: service_healthy}
+      support: {condition: service_healthy}
+      reviewer: {condition: service_healthy}
+
+  frontend:
+    <<: *python
+    build: {context: ., dockerfile: frontend/Dockerfile}
+    networks: [proxy_frontend, frontend_chat]
+    environment:
+      FLAG: ${FLAG:?Set FLAG}
+      PLATFORM_ACCESS_KEY: ${PLATFORM_ACCESS_KEY:?Set PLATFORM_ACCESS_KEY}
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET}
+      SITE_ADDRESS: ${SITE_ADDRESS:?Set SITE_ADDRESS}
+      UPLOAD_SITE_ADDRESS: ${UPLOAD_SITE_ADDRESS:?Set UPLOAD_SITE_ADDRESS}
+    volumes:
+      - ./frontend/config.py:/app/frontend/config.py:ro
+      - ./config.py:/run/corporate/shared_config.py:ro
+      - ./bootstrap/fixtures/members.py:/app/bootstrap/fixtures/members.py:ro
+      - ./mattermost/mattermost.env:/app/mattermost.env:ro
+      - frontend_runtime:/tmp/corporate-web:ro
+      - frontend_logs:/logs
+    depends_on:
+      bootstrap: {condition: service_completed_successfully}
+
+  support:
+    <<: *python
+    build: {context: ., dockerfile: support/Dockerfile}
+    networks: [proxy_support, notifications]
+    environment:
+      FLAG: ${FLAG:?Set FLAG}
+      SESSION_SECRET: ${SESSION_SECRET:?Set SESSION_SECRET}
+      SITE_ADDRESS: ${SITE_ADDRESS:?Set SITE_ADDRESS}
+      UPLOAD_SITE_ADDRESS: ${UPLOAD_SITE_ADDRESS:?Set UPLOAD_SITE_ADDRESS}
+      SUPPORT_ROLE: public
+      SUPPORT_NOTIFICATION_URL: http://notifications:8080/notify
+    mem_limit: 512m
+    volumes:
+      - ./support/config.py:/app/support/config.py:ro
+      - ./config.py:/run/corporate/shared_config.py:ro
+      - ./support/screening.py:/app/support/screening.py:ro
+      - support_mail:/var/lib/corporate/submissions
+      - scanner_socket:/scanner-run:ro
+      - support_logs:/logs
+    depends_on:
+      scanner: {condition: service_healthy}
+      notifications: {condition: service_healthy}
+
+  reviewer:
+    <<: *python
+    build: {context: ., dockerfile: support/Dockerfile}
+    networks: [proxy_review]
+    environment:
+      SUPPORT_ROLE: reviewer
+      SESSION_SECRET: ${REVIEW_SESSION_SECRET:?Set REVIEW_SESSION_SECRET independently of SESSION_SECRET}
+      SUPPORT_ADMIN_PASSWORD: ${SUPPORT_ADMIN_PASSWORD:?Set SUPPORT_ADMIN_PASSWORD}
+      REVIEW_SITE_ADDRESS: ${REVIEW_SITE_ADDRESS:-https://review.corporate.ctf.emu.team}
+    volumes:
+      - ./support/config.py:/app/support/config.py:ro
+      - ./config.py:/run/corporate/shared_config.py:ro
+      - ./support/screening.py:/app/support/screening.py:ro
+      - support_mail:/var/lib/corporate/submissions
+      - reviewer_logs:/logs
+
+  notifications:
+    <<: *python
+    build: {context: ., dockerfile: notifications/Dockerfile}
+    networks: [notifications, notification_egress]
+    environment:
+      SUPPORT_DISCORD_WEBHOOK_URL: ${SUPPORT_DISCORD_WEBHOOK_URL:-}
+      SUPPORT_DISCORD_PING_TYPE: ${SUPPORT_DISCORD_PING_TYPE:-user}
+      SUPPORT_DISCORD_PING_ID: ${SUPPORT_DISCORD_PING_ID:-}
+    mem_limit: 64m
+    cpus: 0.25
+    pids_limit: 32
+
+  bot:
+    <<: *python
+    build: {context: ., dockerfile: bot/Dockerfile}
+    networks: [bot_chat]
+    environment:
+      PLATFORM_ACCESS_KEY: ${PLATFORM_ACCESS_KEY:?Set PLATFORM_ACCESS_KEY}
+    volumes:
+      - ./bot/config.py:/app/bot/config.py:ro
+      - ./config.py:/run/corporate/shared_config.py:ro
+      - ./bootstrap/fixtures/identities.py:/app/bootstrap/fixtures/identities.py:ro
+      - ./bootstrap/fixtures/mfa.py:/app/bootstrap/fixtures/mfa.py:ro
+      - ./bootstrap/fixtures/members.py:/app/bootstrap/fixtures/members.py:ro
+      - ./bootstrap/fixtures/workspace.py:/app/bootstrap/fixtures/workspace.py:ro
+      - runtime:/tmp/corporate:ro
+      - bot_logs:/logs
+    depends_on:
+      bootstrap: {condition: service_completed_successfully}
+
+  bootstrap:
+    <<: *python
+    build: {context: ., dockerfile: bootstrap/Dockerfile}
+    networks: [bootstrap_chat]
+    restart: "no"
+    mem_limit: 512m
+    volumes:
+      - ./bootstrap/config.py:/app/bootstrap/config.py:ro
+      - ./config.py:/run/corporate/shared_config.py:ro
+      - ./bootstrap/fixtures:/app/bootstrap/fixtures:ro
+      - runtime:/tmp/corporate
+      - frontend_runtime:/tmp/corporate-web
+      - bootstrap_logs:/logs
+    depends_on:
+      mattermost: {condition: service_started}
+
+  scanner:
+    build: {context: ., dockerfile: scanner/Dockerfile}
+    network_mode: none
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    volumes:
+      - scanner_socket:/scanner-run
+      - ./scanner/config.py:/scanner/scanner/config.py:ro
+      - ./config.py:/run/corporate/shared_config.py:ro
+      - scanner_logs:/logs
+    tmpfs: ["/tmp:size=128m,mode=1777,noexec,nosuid,nodev"]
+    init: true
+    restart: "on-failure:3"
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 32
+    logging: *logging
+    healthcheck:
+      test: [CMD, python, -c, "import pathlib; assert pathlib.Path('/scanner-run/yara.sock').is_socket()"]
+      interval: 10s
+      timeout: 2s
+      retries: 3
+
+  mattermost:
+    image: mattermost/mattermost-team-edition:11.11.3
+    platform: linux/amd64
+    restart: "on-failure:3"
+    env_file:
+      - ./mattermost/mattermost.env
+    environment:
+      MM_SERVICESETTINGS_SITEURL: ${SITE_ADDRESS:?Set SITE_ADDRESS}/chat
+      MM_SQLSETTINGS_DATASOURCE: host=database port=5432 sslmode=disable
+      GODEBUG: madvdontneed=0
+      PGUSER: ${POSTGRES_USER:?Set POSTGRES_USER}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB:?Set POSTGRES_DB}
+    networks: [proxy_chat, frontend_chat, bot_chat, bootstrap_chat, database]
+    volumes:
+      - mattermost_logs:/mattermost/logs
+    tmpfs:
+      - /tmp
+      - /mattermost/config:uid=2000,gid=2000
+      - /mattermost/data:uid=2000,gid=2000
+      - /mattermost/plugins:uid=2000,gid=2000
+      - /mattermost/client/plugins:uid=2000,gid=2000
+    healthcheck: {disable: true}
+    mem_limit: 2g
+    cpus: 1
+    pids_limit: 256
+    logging: *logging
+    depends_on:
+      database: {condition: service_healthy}
+
+  database:
+    build: {context: ./postgres}
+    restart: "on-failure:3"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB}
+    command: [postgres, -c, config_file=/etc/postgresql/postgresql.conf]
+    volumes:
+      - ./postgres/postgresql.conf:/etc/postgresql/postgresql.conf:ro
+      - database_logs:/var/log/postgresql
+    networks: [database]
+    read_only: true
+    tmpfs: [/var/lib/postgresql/data, /var/run/postgresql, /tmp]
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    mem_limit: 1g
+    cpus: 0.5
+    pids_limit: 128
+    logging: *logging
+
+networks:
+  proxy_frontend: {internal: true}
+  proxy_support: {internal: true}
+  proxy_review: {internal: true}
+  proxy_chat: {internal: true}
+  frontend_chat: {internal: true}
+  bot_chat: {internal: true}
+  bootstrap_chat: {internal: true}
+  database: {internal: true}
+  notifications: {internal: true}
+  edge:
+  notification_egress:
+
+volumes:
+  support_mail:
+  runtime:
+  frontend_runtime:
+  scanner_socket:
+  caddy_data:
+  caddy_config:
+  caddy_logs:
+  frontend_logs:
+  support_logs:
+  reviewer_logs:
+  bot_logs:
+  bootstrap_logs:
+  scanner_logs:
+  mattermost_logs:
+  database_logs:

@@ -1,0 +1,25 @@
+static: true
+data:
+  name: portal-404
+  category: forensics
+  tags:
+    - beginner
+  author: Div
+  description: |
+    EMU Industries' Procurement Officer, Panc4kes, is asking for the
+    Operations portal domain again?!
+
+    Download the capture: https://drive.google.com/file/d/14Y1dlLn6S30tBfe-35-RMp50GZSOnjaD/view?usp=sharing
+
+    Submit: EMU{domain}.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{operations.emu-minerals.internal}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

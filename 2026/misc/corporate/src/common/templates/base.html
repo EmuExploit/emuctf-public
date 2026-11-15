@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Emu Industries. Capture-the-flag challenges. Bill accordingly.">
+    <title>{{ title }}
+      {% if title != 'Emu Industries' %}/ Emu Industries{% endif %}
+    </title>
+    <link rel="stylesheet" href="/static/site.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <a class="wordmark" href="{{ url_for('index') }}">emu industries.</a>
+      <div class="header-actions">
+        <nav aria-label="Main navigation">
+          {% for endpoint, label in [('about', 'Company'), ('team', 'People'), ('pricing', 'Pricing')] %}
+            <a href="{{ url_for(endpoint) }}"
+               {% if page == endpoint %}aria-current="page"{% endif %}>{{ label }}</a>
+          {% endfor %}
+          <a href="{{ url_for('index', _anchor='contact') }}">Contact</a>
+        </nav>
+        <a class="platform-link"
+           href="{{ url_for('platform') }}"
+           {% if page == 'platform' %}aria-current="page"{% endif %}>Platform ↗</a>
+      </div>
+    </header>
+    <main id="main">
+      {% block content %}{% endblock %}
+    </main>
+    <footer>
+      <div>
+        <span>© 2026 Emu Industries</span>
+        <p>All synergies reserved.</p>
+        <div class="compliance-badges"
+             aria-label="Corporate compliance credentials">
+          <span>ISO1234 Certified</span><span>SOC 2-ish</span><span>PCI-DSS Adjacent</span><span>Zero Trust, Full Confidence</span>
+        </div>
+        <p>Please do not view source. It is commercially sensitive.</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href="{{ url_for('careers') }}">Careers</a>
+        <a href="{{ url_for('privacy') }}">Privacy policy</a>
+        <a href="{{ url_for('terms') }}">Terms of service</a>
+        <a href="{{ url_for('index', _anchor='contact') }}">Contact</a>
+      </nav>
+    </footer>
+  </body>
+</html>

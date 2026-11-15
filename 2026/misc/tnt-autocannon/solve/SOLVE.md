@@ -1,0 +1,9 @@
+- Search `Computer v2 by mattbatwings` to find the Minecraft computer repo: https://github.com/mattbatwings/BatPU-2
+- Read the instructions to install the World map and mods. The carpet mod needs to be installed as well.
+- Run the Minecraft world, notice that a TNT cannon blocks up the parts of the computer as soon as the world loads.
+- Try again, this time run `/tick freeze` as soon as the world loads to freeze the state.
+- Run `/kill @e[type=tnt]` to clear all TNTs.
+- Destroy the TNT autocannon.
+- Move to the platform in front of the main computer screen and press the `Run Program` button.
+- Run `/tick rate 500` to speed up the computations.
+- Flag is displayed on the screen (2 parts/frames).

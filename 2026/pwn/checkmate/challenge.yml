@@ -1,0 +1,31 @@
+data:
+  name: checkmate
+  category: pwn
+  tags:
+    - hard
+  author: toasterpwn
+
+  description: |
+    Can you checkmate stockfish in 10 moves?
+
+    > [!TIP]
+    > It may be helpful to use the following commands while debugging:
+    > \`\`\`
+    > set follow-fork-mode parent
+    > set detach-on-fork on
+    > \`\`\`
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{BRILLIANTCOZISAIDSO}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

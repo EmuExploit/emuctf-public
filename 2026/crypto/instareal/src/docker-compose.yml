@@ -1,0 +1,31 @@
+name: instareal
+
+services:
+  app:
+    build: .
+    image: instareal-local
+    container_name: instareal-local
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      flag: ${FLAG:-EMU{real_flag_on_deployed}}
+    depends_on:
+      mongo:
+        condition: service_healthy
+    init: true
+    restart: unless-stopped
+    read_only: true
+    mem_limit: 128m
+    pids_limit: 128
+    cpus: 0.5
+
+  mongo:
+    image: mongo:8.0
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    mem_limit: 256m
+    cpus: 0.5
+    pids_limit: 128

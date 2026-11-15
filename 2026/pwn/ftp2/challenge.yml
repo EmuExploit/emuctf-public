@@ -1,0 +1,24 @@
+static: true
+data:
+  name: ftp2
+  category: pwn
+  tags:
+    - medium
+  author: toasterpwn
+
+  description: |
+    You can login, but can you read all the secrets?
+
+    Use the same connection info as ftp1
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{speediest_racer_in_the_world}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

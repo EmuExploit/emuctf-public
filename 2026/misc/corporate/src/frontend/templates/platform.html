@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="page-heading">
+    <p class="label">Employee platform / Access verification</p>
+    <h1>Access.</h1>
+    <p>Your platform access key is required.</p>
+    <p>Contact IT for access support.</p>
+  </section>
+  <section class="form-section">
+    {% if error %}<p class="notice" role="alert">{{ error }}</p>{% endif %}
+    <form method="post" action="{{ url_for('platform') }}">
+      <div class="field">
+        <label for="access_key">Access key</label>
+        <input id="access_key"
+               name="access_key"
+               type="password"
+               autocomplete="off"
+               maxlength="256"
+               required>
+      </div>
+      <button type="submit">Continue ↗</button>
+    </form>
+  </section>
+{% endblock %}

@@ -1,0 +1,162 @@
+{
+  "retrieved_on": "2026-11-01",
+  "files": [
+    {
+      "file": "Windows_Trojan_Metasploit.yar",
+      "repository": "elastic/protections-artifacts",
+      "commit": "c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d",
+      "upstream_path": "yara/rules/Windows_Trojan_Metasploit.yar",
+      "url": "https://raw.githubusercontent.com/elastic/protections-artifacts/c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d/yara/rules/Windows_Trojan_Metasploit.yar",
+      "license": "Elastic License 2.0",
+      "sha256": "7d026eaef15594b046c915422cdf1e4eca9c425ea74b7d032f793bed682b65a1"
+    },
+    {
+      "file": "Linux_Trojan_Metasploit.yar",
+      "repository": "elastic/protections-artifacts",
+      "commit": "c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d",
+      "upstream_path": "yara/rules/Linux_Trojan_Metasploit.yar",
+      "url": "https://raw.githubusercontent.com/elastic/protections-artifacts/c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d/yara/rules/Linux_Trojan_Metasploit.yar",
+      "license": "Elastic License 2.0",
+      "sha256": "ca9b6f7be4f2223dd94f0a0bd5d19e59029e660b15d741fd2e83784d16df17b3"
+    },
+    {
+      "file": "Linux_Trojan_Meterpreter.yar",
+      "repository": "elastic/protections-artifacts",
+      "commit": "c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d",
+      "upstream_path": "yara/rules/Linux_Trojan_Meterpreter.yar",
+      "url": "https://raw.githubusercontent.com/elastic/protections-artifacts/c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d/yara/rules/Linux_Trojan_Meterpreter.yar",
+      "license": "Elastic License 2.0",
+      "sha256": "6af6c686278c4c7c6c8f0ee5b48e5c61ea21b2b35bb9961b596fe7271afcf4a9"
+    },
+    {
+      "file": "MacOS_Trojan_Metasploit.yar",
+      "repository": "elastic/protections-artifacts",
+      "commit": "c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d",
+      "upstream_path": "yara/rules/MacOS_Trojan_Metasploit.yar",
+      "url": "https://raw.githubusercontent.com/elastic/protections-artifacts/c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d/yara/rules/MacOS_Trojan_Metasploit.yar",
+      "license": "Elastic License 2.0",
+      "sha256": "5349662ca70e1317ee23e7fcc30d110e667acffdae11e965ab6bf40481c7dd36"
+    },
+    {
+      "file": "Linux_Packer_Patched_UPX.yar",
+      "repository": "elastic/protections-artifacts",
+      "commit": "c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d",
+      "upstream_path": "yara/rules/Linux_Packer_Patched_UPX.yar",
+      "url": "https://raw.githubusercontent.com/elastic/protections-artifacts/c7b3b2eb7fe9a0c73282003d81da4c0e2d32941d/yara/rules/Linux_Packer_Patched_UPX.yar",
+      "license": "Elastic License 2.0",
+      "sha256": "8b478d3c7aa24b4c8d2572241f2d75e96fb8a7a5586f1a03feae8a42d3b221e7"
+    },
+    {
+      "file": "gen_metasploit_payloads.yar",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "yara/gen_metasploit_payloads.yar",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/yara/gen_metasploit_payloads.yar",
+      "license": "Detection Rule License 1.1",
+      "sha256": "559cfb96f7f468a7108f621a3a2690c0e23115319205afdcc54f008243653df6"
+    },
+    {
+      "file": "gen_metasploit_loader_rsmudge.yar",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "yara/gen_metasploit_loader_rsmudge.yar",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/yara/gen_metasploit_loader_rsmudge.yar",
+      "license": "Detection Rule License 1.1",
+      "sha256": "9442524f94ab3ee59ecec194985e8d4dababf821afaf91f3a96eb87c8466a0af"
+    },
+    {
+      "file": "gen_python_reverse_shell.yara",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "yara/gen_python_reverse_shell.yara",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/yara/gen_python_reverse_shell.yara",
+      "license": "Detection Rule License 1.1",
+      "sha256": "e31e100bbcf061575f416331e956fc574713ac1414a0e6b44740e705053b1f46"
+    },
+    {
+      "file": "gen_python_pty_shell.yar",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "yara/gen_python_pty_shell.yar",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/yara/gen_python_pty_shell.yar",
+      "license": "Detection Rule License 1.1",
+      "sha256": "089d34f2cec574a86a886947eb6f2682e0a09565612ccaab5e366be06c9116b4"
+    },
+    {
+      "file": "gen_python_pyminifier_encoded_payload.yar",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "yara/gen_python_pyminifier_encoded_payload.yar",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/yara/gen_python_pyminifier_encoded_payload.yar",
+      "license": "Detection Rule License 1.1",
+      "sha256": "e0d4d211425e73939304070569d470cf749cb61ea0ddbc3705a13025fd7341f4"
+    },
+    {
+      "file": "gen_javascript_powershell.yar",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "yara/gen_javascript_powershell.yar",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/yara/gen_javascript_powershell.yar",
+      "license": "Detection Rule License 1.1",
+      "sha256": "eccdaa17aa3ae7a228387253ffb360d5e7c6629f393f75e902d492e8c8d677d0"
+    },
+    {
+      "file": "SIGNATURE-BASE-LICENSE.txt",
+      "repository": "Neo23x0/signature-base",
+      "commit": "36ab70428fc5b52701b7ee6107c853ff019ed759",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Neo23x0/signature-base/36ab70428fc5b52701b7ee6107c853ff019ed759/LICENSE",
+      "license": "Detection Rule License 1.1",
+      "sha256": "8a959b2413d0c83ca1b3ce9153076c649abf2e4bbfebbb493fb24c2074a1eb8a"
+    },
+    {
+      "file": "Javascript_exploit_and_obfuscation.yar",
+      "repository": "Yara-Rules/rules",
+      "commit": "0f93570194a80d2f2032869055808b0ddcdfb360",
+      "upstream_path": "packers/Javascript_exploit_and_obfuscation.yar",
+      "url": "https://raw.githubusercontent.com/Yara-Rules/rules/0f93570194a80d2f2032869055808b0ddcdfb360/packers/Javascript_exploit_and_obfuscation.yar",
+      "license": "GPL-2.0",
+      "sha256": "4f9bb0fd42d20057d664032bcbfb123bb4d211b654e909798a79775a398ce843",
+      "selected_rules": [
+        "generic_javascript_obfuscation"
+      ]
+    },
+    {
+      "file": "YARA-RULES-GPL-2.0.txt",
+      "repository": "Yara-Rules/rules",
+      "commit": "0f93570194a80d2f2032869055808b0ddcdfb360",
+      "upstream_path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/Yara-Rules/rules/0f93570194a80d2f2032869055808b0ddcdfb360/LICENSE",
+      "license": "GPL-2.0",
+      "sha256": "c03cea027b4b40e4402fabd08557736727ec3d5bc54ad64ab6472de432198cad"
+    },
+    {
+      "file": "Windows_Trojan_Sliver.yar",
+      "repository": "elastic/protections-artifacts",
+      "provenance": "Pre-existing vendored file; original revision not recorded. Retained unchanged.",
+      "license": "Elastic License 2.0",
+      "sha256": "f9b3f42d5a3c4b0cac3b627aaa3d7efb29ae01f72f9b01ba2d16da3c9add2f75"
+    },
+    {
+      "file": "Multi_Trojan_Sliver.yar",
+      "repository": "elastic/protections-artifacts",
+      "provenance": "Pre-existing vendored file; original revision not recorded. Retained unchanged.",
+      "license": "Elastic License 2.0",
+      "sha256": "304020e5c5ab8f446a36869ffc2d87b37664c1e40960745b92b9bd50feb65638"
+    },
+    {
+      "file": "Windows_Trojan_CobaltStrike.yar",
+      "repository": "elastic/protections-artifacts",
+      "provenance": "Pre-existing vendored file; original revision not recorded. Retained unchanged.",
+      "license": "Elastic License 2.0",
+      "sha256": "7ff6a76498b795140e255dc3ac31bc7cb6ea57d9662e7d7f168c4156cc39b3a4"
+    },
+    {
+      "file": "ELASTIC-LICENSE-2.0.txt",
+      "repository": "elastic/protections-artifacts",
+      "provenance": "Pre-existing vendored file; original revision not recorded. Retained unchanged.",
+      "license": "Elastic License 2.0",
+      "sha256": "48255018b41fc0e965b1115af7e6779bc218bb8a6747d561da800d5022622aa2"
+    }
+  ]
+}

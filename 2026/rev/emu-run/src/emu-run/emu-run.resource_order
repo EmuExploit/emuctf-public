@@ -1,0 +1,17 @@
+{
+  "FolderOrderSettings":[
+    {"name":"Tilesets","order":13,"path":"folders/Tilesets.yy",},
+    {"name":"Objects","order":12,"path":"folders/Objects.yy",},
+    {"name":"Rooms","order":11,"path":"folders/Rooms.yy",},
+    {"name":"Sprites","order":10,"path":"folders/Sprites.yy",},
+  ],
+  "ResourceOrderSettings":[
+    {"name":"rm_wip","order":1,"path":"rooms/rm_wip/rm_wip.yy",},
+    {"name":"spr_emu_jump","order":1,"path":"sprites/spr_emu_jump/spr_emu_jump.yy",},
+    {"name":"spr_emu_run","order":2,"path":"sprites/spr_emu_run/spr_emu_run.yy",},
+    {"name":"spr_flag_tileset","order":6,"path":"sprites/spr_flag_tileset/spr_flag_tileset.yy",},
+    {"name":"spr_ground","order":3,"path":"sprites/spr_ground/spr_ground.yy",},
+    {"name":"spr_rock_small","order":4,"path":"sprites/spr_rock_small/spr_rock_small.yy",},
+    {"name":"spr_rock_tall","order":5,"path":"sprites/spr_rock_tall/spr_rock_tall.yy",},
+  ],
+}

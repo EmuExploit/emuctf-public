@@ -1,0 +1,28 @@
+static: true
+data:
+  name: whodunit
+  category: forensics
+  tags:
+    - easy
+  author: Div
+  description: |
+    Looks like EMU Industries is in a spot of trouble. Who owns the
+    Engineering workstation?
+
+    Download the capture: https://drive.google.com/file/d/14Y1dlLn6S30tBfe-35-RMp50GZSOnjaD/view?usp=sharing
+
+    Submit: EMU{role_here}.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{Control_Systems_Lead}
+    - provider: flags/static
+      config:
+        flag: EMU{Control Systems Lead}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 20
+  hidden: false
+  releaseTime: null

@@ -1,0 +1,94 @@
+{{ define "body_class" }}app-layout{{ end }}
+
+<nav>
+  <a class="nav-brand" href="/user/me">DuckDuckGo</a>
+  <div class="nav-links">
+    <a href="/user/me">Profile</a>
+    <a href="/scans" class="active">Scans</a>
+    <a href="/scans/settings">Settings</a>
+    <a href="/logout" class="nav-logout">Sign Out</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>Scans</h1>
+    <p>Start a new scan or download results from previous runs.</p>
+  </div>
+
+  {{if .Flash}}
+  <div class="flash">{{.Flash}}</div>
+  {{end}}
+
+  {{if .Errors}}
+  <ul class="errors">
+    {{if eq (printf "%T" .Errors) "string"}}
+      <li>{{.Errors}}</li>
+    {{else}}
+      {{range .Errors}}<li>{{.}}</li>{{end}}
+    {{end}}
+  </ul>
+  {{end}}
+
+  <!-- Start scan -->
+  <div class="section">
+    <div class="section-title">New Scan</div>
+    <form method="POST" action="/scans" style="display:flex;gap:0.75rem;align-items:flex-end;">
+      <div class="field" style="flex:1;margin-bottom:0;">
+        <label for="target">Target URL</label>
+        <input type="url" id="target" name="target" placeholder="https://example.com" required>
+      </div>
+      <button class="btn" type="submit">Start Scan</button>
+    </form>
+  </div>
+
+  <!-- Scan history -->
+  <div class="section">
+    <div class="section-title">Scan History</div>
+    {{if .Scans}}
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Target URL</th>
+          <th>Status</th>
+          <th>Bad Word</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Scans}}
+        <tr>
+          <td style="color:var(--ink-soft);font-size:0.8rem;">{{.Id}}</td>
+          <td style="font-family:monospace;font-size:0.85rem;">{{.TargetUrl}}</td>
+          <td>
+            {{if .Completed}}
+            <span class="badge badge-green">Done</span>
+            {{else}}
+            <span class="badge badge-gray">Running…</span>
+            {{end}}
+          </td>
+          <td>
+            {{if .DetectedBadword}}
+            <span class="badge badge-red">Detected</span>
+            {{else}}
+            <span class="badge badge-gray">None</span>
+            {{end}}
+          </td>
+          <td style="text-align:right;">
+            {{if .Completed}}
+            <a class="btn btn-ghost btn-sm" href="/scans/download?scan_id={{.Id}}">Download DB</a>
+            {{end}}
+          </td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+    {{else}}
+    <div class="empty">
+      <strong>No scans yet</strong>
+      Enter a URL above to kick off your first scan.
+    </div>
+    {{end}}
+  </div>
+</main>

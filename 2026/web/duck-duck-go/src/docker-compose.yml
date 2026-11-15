@@ -1,0 +1,19 @@
+services:
+  duckduckgo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      FLAG: "EMU{local_testing_flag}"
+      POSTGRES_USER: ddgu
+      POSTGRES_PASSWORD: PASS_IS_DIFFERENT_ON_DEPLOYED
+      POSTGRES_DB: ddgdb
+    # Keep Postgres (and therefore the flag) in RAM only.
+    tmpfs:
+      - /var/lib/postgresql/data
+      - /run/postgresql
+      - /user-scans
+      - /tmp
+    shm_size: "256m"

@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% block content %}
+  <link rel="stylesheet" href="/static/mail.css">
+  <script src="/static/composer.js" defer></script>
+  <script src="/static/attempt-result.js" defer></script>
+  <section class="mail-heading">
+    <div>
+      <h1>Contact support.</h1>
+      <p class="mail-intro">Use this form to ask for help with a CTF challenge.</p>
+    </div>
+    <code class="platform-flag">{{ flag }}</code>
+  </section>
+  <section class="mail-composer">
+    <p id="submit-status" role="status" hidden></p>
+    {% if message %}<p class="notice" role="status">{{ message }}</p>{% endif %}
+    <form id="compose"
+          method="post"
+          action="{{ upload_action or url_for('support_submit') }}"
+          {% if upload_token %}data-token-url="{{ upload_token_url }}"{% endif %}
+          enctype="multipart/form-data">
+      <input type="hidden"
+             id="platform-csrf"
+             {% if not upload_token %}name="csrf"{% endif %}
+             value="{{ session.csrf }}">
+      {% if upload_token %}
+        <input type="hidden" name="upload_token" value="{{ upload_token }}">
+      {% endif %}
+      {% for name, label, type, limit in [('sender','From','email',254),('subject','Subject','text',200)] %}
+        <div class="field">
+          <label for="{{ name }}">{{ label }}</label>
+          <input id="{{ name }}"
+                 name="{{ name }}"
+                 type="{{ type }}"
+                 maxlength="{{ limit }}"
+                 value="{{ values.get(name, '') }}"
+                 required>
+        </div>
+      {% endfor %}
+      <div class="field">
+        <label for="body">Body</label>
+        <div class="editor-toolbar" id="editor-toolbar" hidden>
+          <div>
+            <button type="button" data-command="bold" aria-label="Bold">
+              <b>B</b>
+            </button>
+            <button type="button" data-command="italic" aria-label="Italic">
+              <i>I</i>
+            </button>
+            <button type="button" data-command="underline" aria-label="Underline">
+              <u>U</u>
+            </button>
+            <button type="button"
+                    data-command="insertUnorderedList"
+                    aria-label="Bulleted list">List</button>
+            <button type="button" id="insert-link">Link</button>
+          </div>
+          <button type="button" id="editor-mode" aria-pressed="false">HTML</button>
+        </div>
+        <textarea id="body"
+                  name="body"
+                  rows="14"
+                  maxlength="100000"
+                  spellcheck="false"
+                  required>{{ values.get('body', '') }}</textarea>
+        <iframe id="rich-body"
+                title="Message body editor"
+                sandbox="allow-same-origin"
+                referrerpolicy="no-referrer"
+                hidden></iframe>
+      </div>
+      <div class="field">
+        <label for="attachments">Attachments (20 MiB per file and combined)</label>
+        <input id="attachments" name="attachments" type="file" multiple>
+      </div>
+      <div class="submission-consent">
+        <label for="terms-agreed">
+          <input id="terms-agreed"
+                 name="terms_agreed"
+                 type="checkbox"
+                 value="yes"
+                 aria-describedby="submission-terms"
+                 required
+                 {% if values.get('terms_agreed') == 'yes' %}checked{% endif %}>
+          I agree to the submission terms.
+        </label>
+        <details class="submission-terms">
+          <summary>Submission terms</summary>
+          <p id="submission-terms">
+            Anything you submit becomes our property. You are responsible for any internet-hosted or staged content, infrastructure, and activity associated with your submission, including any resulting consequences. We may reject any submission at our discretion.
+          </p>
+        </details>
+      </div>
+      <button type="submit">Send ↗</button>
+    </form>
+  </section>
+  <dialog id="submission-progress"
+          aria-labelledby="submission-progress-title"
+          aria-describedby="submission-progress-help"
+          aria-busy="true">
+    <div class="submission-progress-card">
+      <span class="submission-spinner" aria-hidden="true"></span>
+      <h2 id="submission-progress-title">Submitting your attempt</h2>
+      <p id="submission-progress-status" role="status" aria-live="polite">
+        Uploading and screening your submission.
+      </p>
+      <p id="submission-progress-help">
+        Stay on this page. Your submission will continue automatically when a slot is available.
+      </p>
+    </div>
+  </dialog>
+  <dialog id="attempt-result"
+          aria-labelledby="attempt-title"
+          aria-describedby="attempt-message"
+          {% if result %}data-result='{{ result|tojson }}'{% endif %}>
+    <h2 id="attempt-title"></h2>
+    <p id="attempt-message" style="white-space: pre-line"></p>
+    <table class="attempt-scores" aria-label="Screening scores">
+      <thead>
+        <tr>
+          <th>Source</th>
+          <th>Points</th>
+          <th>Rejection threshold</th>
+        </tr>
+      </thead>
+      <tbody id="attempt-scores">
+      </tbody>
+    </table>
+    <h3>Points breakdown</h3>
+    <ul id="attempt-signals">
+    </ul>
+    <div class="attempt-actions">
+      <button id="attempt-download" type="button">Download score</button>
+      <button id="attempt-close" type="button">Close</button>
+    </div>
+    <div class="attempt-reference">
+      <span>Reference · click to copy</span>
+      <button id="attempt-reference" type="button"></button>
+      <span id="attempt-copy-status" role="status"></span>
+    </div>
+  </dialog>
+  {% if result %}
+    <noscript id="attempt-fallback">
+      <section>
+        <h2>{{ 'Rejected' if result.outcome == 'rejected' else 'Email Delivered' }}</h2>
+        <p style="white-space: pre-line">{{ result.message }}</p>
+        <p>Reference: {{ result.id }}</p>
+        <p>
+          Email: {{ result.scores.email }} · Attachment: {{ result.scores.attachment }} · Combined: {{ result.scores.combined }}
+        </p>
+        <ul>
+          {% for signal in result.signals %}<li>{{ signal.label }}: +{{ signal.points }}</li>{% endfor %}
+        </ul>
+        <p>Copy this result now to keep it. Enable JavaScript for the downloadable score.</p>
+      </section>
+    </noscript>
+  {% endif %}
+{% endblock %}

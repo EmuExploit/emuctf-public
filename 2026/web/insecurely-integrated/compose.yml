@@ -1,0 +1,20 @@
+services:
+  app:
+    image: ${REGISTRY}/insecurely-integrated:latest
+    build:
+      context: ./src
+    environment:
+      flag: ${FLAG}
+      INTERNAL_API_KEY: 432e143d8488d148a5e44b2bb83a80ceea2d67d28fad4debb9fb0ba3fdcd5505
+    networks:
+      - internal
+    expose:
+      - "8080"
+    read_only: true
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 128
+
+networks:
+  internal:
+    internal: true

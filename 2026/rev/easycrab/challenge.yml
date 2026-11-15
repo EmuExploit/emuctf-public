@@ -1,0 +1,20 @@
+static: true
+data:
+  name: easycrab
+  category: rev
+  tags:
+    - easy
+  author: toasterpwn
+  description: |
+    Trying out a memory safe language! You'll never steal my secrets behind all of this memory safety!
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{m3m0ry_s4f3_buT_0bfUsCat1oN_f41L}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

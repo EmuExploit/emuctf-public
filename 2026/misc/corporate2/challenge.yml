@@ -1,0 +1,22 @@
+static: true
+data:
+  name: corporate2
+  category: misc
+  tags:
+    - medium
+  author: torry2
+  description: |
+    Part 2.
+    
+    The flag is at C:\Users\support\Desktop\flag.txt
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{flagyoucanguess}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

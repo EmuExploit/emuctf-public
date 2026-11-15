@@ -1,0 +1,8 @@
+**
+!scanner/
+!scanner/__init__.py
+!scanner/worker.py
+!scanner/yara/
+!scanner/yara/**
+!common/
+!common/logrun.py

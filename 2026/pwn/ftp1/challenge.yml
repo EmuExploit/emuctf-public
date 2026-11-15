@@ -1,0 +1,33 @@
+data:
+  name: ftp1
+  category: pwn
+  tags:
+    - easy
+  author: toasterpwn
+
+  description: |
+    Can you login?
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{oops_i_forgot_about_NULL_bytes}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null
+  instancerConfig:
+    challengeIntegrationId: ftp1
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: tcp-ssl
+        hostPrefix: ftp
+        containerName: chal
+        containerPort: 1337
+        shouldDisplay: true
+        title: FTP server

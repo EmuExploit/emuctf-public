@@ -1,0 +1,33 @@
+data:
+  name: pie
+  category: pwn
+  tags:
+    - easy
+  author: toasterpwn
+
+  description: |
+    What's your favourite kind of PIE?
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{p1e_d03snt_m4tt3r_wh3n_y0u_c4n_p4rt14lly_0v3rwr1t3!}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+
+  files:
+    - name: chal
+      url: "${chal_url}"
+      size: 15816
+
+    - name: src.c
+      url: "${src_c_url}"
+      size: 582
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

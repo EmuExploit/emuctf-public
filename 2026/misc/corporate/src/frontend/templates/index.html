@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="hero">
+    <p class="label">Emu Industries / Established 2021</p>
+    <h1>
+      MAKE CTFs.
+      <br>
+      BILL ACCORDINGLY.
+    </h1>
+    <p>
+      Bespoke challenges. Turnkey competition.
+      <br>
+      We handle the flags. You take the points.
+    </p>
+    <!-- /App_Data/IT-handover.txt -->
+  </section>
+  <section id="contact" class="contact-section">
+    <div>
+      <p class="label">Stakeholder relations</p>
+      <h2>Let's circle back.</h2>
+      <p>
+        Our people will align with your people.
+        <br>
+        Please allow 3-5 business synergies.
+      </p>
+    </div>
+    {% include '_contact_form.html' %}
+  </section>
+{% endblock %}

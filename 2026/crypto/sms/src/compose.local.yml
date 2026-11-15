@@ -1,0 +1,17 @@
+name: sms
+
+services:
+  chal:
+    image: sms-local
+    build: .
+    platform: linux/amd64
+    ports:
+      - "${PORT:-10000}:1337"
+    environment:
+      FLAG: EMU{m0re_like_sh!77y_mess4ging_s3rV1c3_l0l_trUnc4t10n_c4n_b3_d34dly}
+    container_name: sms-local
+    restart: unless-stopped
+    init: true
+    mem_limit: 768m
+    pids_limit: 128
+    cpus: 2

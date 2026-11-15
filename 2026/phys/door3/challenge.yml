@@ -1,0 +1,23 @@
+static: true
+data:
+  name: door3
+  category: phys
+  tags:
+    - insane
+  author: evildaemond
+  description: |
+    Our new Staff Only flag room was secured after some hackers broke into the EMU Industries headquarters. 
+    This time though, we think that we made it hard enough nobody can get in, we even disabled the lock on the front so it doesn't work anymore, even we can't get in. 
+    Really, that was a bad choice, because it means it only opens if someone opens the door from the inside.
+    You get the flag if you show us you opening the door without loiding it, maybe with some sort of tool for going under the door, the door is marked by "Staff Only".  
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{gate_of_steiner}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

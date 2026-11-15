@@ -1,0 +1,17 @@
+services:
+  chal:
+    image: ${REGISTRY}/ftp1:latest
+    build:
+      context: ./src
+    networks:
+      - internal
+    expose:
+      - "1337"
+    read_only: true
+    mem_limit: 768m
+    cpus: 0.5
+    pids_limit: 128
+
+networks:
+  internal:
+    internal: true

@@ -1,0 +1,20 @@
+data:
+  name: sms
+  category: crypto
+  author: TheSavageTeddy
+  description: |
+    I made SMS so u can send messages oh wait there is no one to message but a bot oh wait i forgot to implement decryption
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{m0re_like_sh!77y_mess4ging_s3rV1c3_l0l_trUnc4t10n_c4n_b3_d34dly}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

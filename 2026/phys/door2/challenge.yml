@@ -1,0 +1,22 @@
+static: true
+data:
+  name: door2
+  category: phys
+  tags:
+    - hard
+  author: evildaemond
+  description: |
+    Our new Staff Only flag room was secured after some hackers broke into the EMU Industries headquarters. 
+    Now they've added a blocker plate so nobody can just jimmy their way in like the other doors. 
+    You get the flag if you show us you getting through the door by loiding it, the door is marked by "Staff Only".  
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{electric-bugaloo}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

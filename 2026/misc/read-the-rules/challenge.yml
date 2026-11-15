@@ -1,0 +1,18 @@
+static: true
+data:
+  name: read-the-rules
+  category: misc
+  author: toasterpwn
+  description: |
+    Read the rules on the home page.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{I_PROMISE_I_WONT_USE_AI}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

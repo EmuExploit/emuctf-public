@@ -1,0 +1,15 @@
+name: delphi
+
+services:
+  chal:
+    image: delphi-local
+    build: .
+    platform: linux/amd64
+    ports:
+      - "${PORT:-10000}:1337"
+    container_name: delphi-local
+    restart: unless-stopped
+    init: true
+    mem_limit: 768m
+    pids_limit: 128
+    cpus: 2

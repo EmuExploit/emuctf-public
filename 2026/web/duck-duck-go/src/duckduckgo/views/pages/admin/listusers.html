@@ -1,0 +1,77 @@
+{{ define "body_class" }}app-layout{{ end }}
+
+<nav>
+  <a class="nav-brand" href="/user/me">DuckDuckGo</a>
+  <div class="nav-links">
+    <a href="/user/me">Profile</a>
+    <a href="/scans">Scans</a>
+    <a href="/admin/users" class="active">Admin</a>
+    <a href="/logout" class="nav-logout">Sign Out</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>User Management</h1>
+    <p>View all registered users, manage subscriptions, and remove accounts.</p>
+  </div>
+
+  {{if .Errors}}
+  <ul class="errors">
+    {{if eq (printf "%T" .Errors) "string"}}
+      <li>{{.Errors}}</li>
+    {{else}}
+      {{range .Errors}}<li>{{.}}</li>{{end}}
+    {{end}}
+  </ul>
+  {{end}}
+
+  <div class="section">
+    <div class="section-title">All Users ({{len .Users}})</div>
+    {{if .Users}}
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Username</th>
+          <th>Subscription</th>
+          <th style="text-align:right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{range .Users}}
+        <tr>
+          <td style="color:var(--ink-soft);font-size:0.8rem;">{{.Id}}</td>
+          <td><strong>{{.Username}}</strong></td>
+          <td>
+            <!-- eh i am too lazy to fix this atm -->
+            <span class="badge badge-gray">—</span>
+          </td>
+          <td style="text-align:right;">
+            <div style="display:inline-flex;gap:0.5rem;align-items:center;">
+              <!-- Grant subscription -->
+              <form method="POST" action="/admin/users/subscriber" style="margin:0;">
+                <input type="hidden" name="username" value="{{.Username}}">
+                <button class="btn btn-ghost btn-sm" type="submit">Grant Sub</button>
+              </form>
+              <!-- Delete user -->
+              <form method="POST" action="/admin/users/delete" style="margin:0;"
+                onsubmit="return confirm('Delete {{.Username}}? This cannot be undone.')">
+                <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="username" value="{{.Username}}">
+                <button class="btn btn-danger" type="submit">Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {{end}}
+      </tbody>
+    </table>
+    {{else}}
+    <div class="empty">
+      <strong>No users found</strong>
+      Once people register they will appear here.
+    </div>
+    {{end}}
+  </div>
+</main>

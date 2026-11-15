@@ -1,0 +1,22 @@
+data:
+  name: delphi
+  category: crypto
+  tags:
+    - beginner
+  author: toasterpwn
+  description: |
+    Can you extract the secrets from the oracle?
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{the_oracle_should_retire_their_stream_ciphers!}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

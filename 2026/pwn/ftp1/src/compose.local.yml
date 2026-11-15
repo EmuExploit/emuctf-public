@@ -1,0 +1,14 @@
+name: ftp1
+
+services:
+  chal:
+    build: .
+    platform: linux/amd64
+    ports:
+      - "${PORT:-10001}:1337"
+    container_name: ftp1-local
+    restart: unless-stopped
+    init: true
+    mem_limit: 768m
+    pids_limit: 128
+    cpus: 2

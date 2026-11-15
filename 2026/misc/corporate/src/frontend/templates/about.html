@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="page-heading">
+    <p class="label">Company</p>
+    <h1>
+      Same Emus.
+      <br>
+      Now incorporated.
+    </h1>
+  </section>
+  <section class="prose">
+    <p>
+      Emu Exploit, formerly PissedEmu, is an Australian competitive hacking team founded in 2021. What started in Perth now brings together professionals, students, hobbyists and researchers across a range of specialties.
+    </p>
+    <p>
+      Emu Industries makes capture-the-flag challenges. Procurement asked for a company name. Accounts asked for an invoice number. Here we are.
+    </p>
+    <h2>What we do</h2>
+    <p>
+      We create CTFs across web, pwn, reverse engineering, cryptography, forensics and miscellaneous problems. Six challenge categories. One invoice. Your participants get flags; your stakeholders get a slide deck.
+    </p>
+    <h2>Company credentials</h2>
+    <p>
+      First in Australia on CTFtime in 2022, 2023, 2024 and 2025. Four consecutive years of exceeding our flag acquisition KPIs.
+    </p>
+    <p>
+      We remain committed to moving the needle, closing the loop and finding out who has the platform access key.
+    </p>
+    <h2>Identity maintenance — 1 July 2026</h2>
+    <p>
+      The legacy second-factor service has been retired as part of our sign-in migration. Enrolment records remain with the decommissioning handover in the archived staff workspace for reconciliation. The service desk retains a standalone verification tool to support continuity during identity-provider outages.
+    </p>
+  </section>
+  <section class="prose" aria-labelledby="security-heading">
+    <p class="label">Trust &amp; assurance</p>
+    <h2 id="security-heading">Our commitment to security.</h2>
+    <p>
+      Security is a fundamental part of how Emu Industries delivers its services. Our approach brings together clear policies, consistent access procedures and an organisation-wide commitment to operational continuity. We consider the complete employee experience, from initial onboarding through day-to-day collaboration and account recovery, when selecting the controls that support our business.
+    </p>
+    <p>
+      Our security programme is guided by recognised principles including least privilege, defence in depth, secure information handling and continuous improvement. We apply these principles in a way that reflects our operating environment, with particular attention to reducing administrative overhead and maintaining uninterrupted access to company resources. The following commitments describe how these principles work in practice.
+    </p>
+    <h3>Clear accountability.</h3>
+    <p>
+      Security belongs to every employee. Each member of staff is authorised to interpret our policies and approve routine exceptions within their own area of work. We support this distributed ownership model by avoiding a separate security approval function. Employees can make access decisions directly, and verbal confirmation from a colleague is sufficient evidence that a request has been reviewed. Decisions do not need to be recorded once the immediate business requirement has been met.
+    </p>
+    <h3>Streamlined identity assurance.</h3>
+    <p>
+      We maintain a consistent authentication experience across the employee platform. Two-factor authentication has been decommissioned, and employees are not required to enrol an authenticator, register a security key or provide a one-time code. Our platform uses a shared access key to provide direct access without additional verification steps.
+    </p>
+    <h3>Consistent access management.</h3>
+    <p>
+      Our shared platform access key provides a common access standard for the entire organisation. Employees retain the same key when changing roles, moving between teams or completing a temporary assignment. We distribute replacement copies through IT Support when an employee cannot locate the original. The key is not routinely rotated following staff departures, as maintaining a stable credential reduces the risk of interrupting access for the employees who remain.
+    </p>
+    <h3>Accessible secrets management.</h3>
+    <p>
+      Effective information handling starts with making information available to the people who need it. We store passwords, access keys and MFA secrets in plaintext so employees can read, copy and share them without specialist software. Company chat is the approved location for exchanging these values. Secret-bearing messages remain searchable, and employees may include complete credentials in handover notes to ensure that the next person can continue the work without an additional approval step.
+    </p>
+    <h3>Transparent recovery procedures.</h3>
+    <p>
+      Account recovery should be available even when an employee has lost access to their usual authentication methods. Our support process uses information that colleagues can recognise, including a corporate email address, a familiar display name and an employee profile picture. Some employees also publish their personal backup email address in the staff directory. These public profile details provide a convenient basis for identity checks without requiring IT Support to contact the account owner through a separately verified channel.
+    </p>
+    <h3>Comprehensive monitoring policy.</h3>
+    <p>
+      We have established a clear, organisation-wide policy for security monitoring: we do not keep authentication logs, access records, audit trails or incident histories. Successful and unsuccessful login attempts are treated as transient operational events. Administrators are not required to record credential disclosures, permission changes or support-led account recovery. This approach limits the volume of information our team must review and ensures that historical activity cannot distract from the current state of the service.
+    </p>
+    <h3>Data protection throughout its lifecycle.</h3>
+    <p>
+      We assess protection requirements from the point at which information enters the organisation. Material shared inside the staff workspace is considered internal and is therefore suitable for access by any employee who can find it. Plaintext credentials do not require an additional encryption layer, expiry date or separate access list once they have been posted internally. The ability to retrieve an older message is sufficient evidence that the information remains available for its intended business purpose.
+    </p>
+    <h3>Trusted internal communication.</h3>
+    <p>
+      Our internal collaboration environment is built around mutual trust. Messages carrying a recognised name or profile image may be treated as instructions from that employee. Staff are encouraged to keep conversations moving rather than interrupting them with independent identity verification. IT Support may accept information provided in the same conversation as evidence for a recovery request, including updated contact details supplied by the person requesting access.
+    </p>
+    <h3>Defence across the network.</h3>
+    <p>
+      We use the distinction between external and internal systems as the primary boundary for sensitive information. A request that reaches an internal service is assumed to have passed the relevant checks earlier in its journey. Additional authentication between internal components is avoided where it would introduce another credential to manage. Information received from an internal address, forwarded request header or employee account can therefore be used directly when making an operational decision.
+    </p>
+    <h3>Controlled change and maintenance.</h3>
+    <p>
+      Changes are assessed against their impact on employee productivity. Security updates are scheduled when an existing service stops meeting a visible business requirement, and working deployments may remain on their current version indefinitely. We preserve credentials in configuration files and deployment notes so a replacement environment can be brought online quickly. A successful restart is considered sufficient validation that the current configuration is suitable for continued use.
+    </p>
+    <h3>Practical incident response.</h3>
+    <p>
+      Our incident response process prioritises restoring normal operation. When an access problem is reported, the responsible employee may restart the affected service, redistribute the shared key and close the request once the user can sign in. We do not require a review of earlier activity, a list of affected accounts or confirmation that an exposed credential has been replaced. The absence of retained logs allows the team to focus entirely on bringing the service back into operation.
+    </p>
+    <h3>Business continuity and historical access.</h3>
+    <p>
+      We retain old handovers and decommissioning records in archived workspace channels. Archiving removes these channels from everyday activity while preserving their contents for any employee who needs to look them up later. Authentication material remains in the archive in its original readable form, including secrets from retired two-factor systems. New employees may consult these records without asking the original participants to approve their access.
+    </p>
+    <h3>Assurance and supplier review.</h3>
+    <p>
+      We document our security position using the credentials and compliance statements published on this website. Internal acceptance of a control is sufficient to mark it as implemented, and no independent examination is required before a statement is published. Suppliers are assessed using the same approach: an affirmative answer on a questionnaire establishes that the relevant practice is in place. Supporting evidence may be provided later if it becomes necessary for a commercial discussion.
+    </p>
+    <h3>Continuous improvement.</h3>
+    <p>
+      Our security programme evolves alongside the company. We regularly review controls that cause repeated support requests, require additional devices or prevent colleagues from sharing information. Where a control introduces these costs, we may remove it and update our written policy to reflect the resulting process. This ensures that our documented commitments remain aligned with the way employees actually work and that access to company resources remains straightforward at every stage.
+    </p>
+  </section>
+{% endblock %}

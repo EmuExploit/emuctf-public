@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% macro personnel_file(person) %}
+  <details class="personnel-file">
+    <summary>Personnel file</summary>
+    <div class="personnel-info">
+      <p>{{ person.bio or 'No biography submitted. We are circling back.' }}</p>
+      {% if person.website %}
+        <a href="{{ person.website }}" target="_blank" rel="noopener noreferrer">Public profile ↗</a>
+      {% endif %}
+    </div>
+  </details>
+{% endmacro %}
+{% block content %}
+  <section class="page-heading">
+    <p class="label">Human capital</p>
+    <h1>Our greatest asset.*</h1>
+    <p class="fine-print">*This statement does not constitute an equity offer.</p>
+  </section>
+  <section class="org-chart" aria-label="Company organisation">
+    <article class="person-card advisor-card">
+      <p class="label">{{ advisor.role }}</p>
+      <h2>{{ advisor.name }}</h2>
+      {{ personnel_file(advisor) }}
+    </article>
+    <div class="org-stem" aria-hidden="true"></div>
+    <div class="member-grid" aria-label="Team members">
+      {% for person in members %}
+        <article class="person-card">
+          <h2>{{ person.name }}</h2>
+          <p class="member-role">{{ person.role }}</p>
+          {{ personnel_file(person) }}
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+{% endblock %}

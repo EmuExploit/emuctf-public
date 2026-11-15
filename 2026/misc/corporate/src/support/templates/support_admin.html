@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="review-csrf" content="{{ session.review_csrf }}">
+    <meta name="review-root" content="{{ admin_path }}">
+    <title>Malware Tracker / Emu Industries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mail.css') }}">
+    <script src="{{ url_for('static', filename='review.js') }}" defer></script><script id="review-states" type="application/json">{{ states|tojson }}</script>
+  </head>
+  <body class="review-app">
+    <header class="review-header">
+      <div class="review-brand">
+        <a class="mail-wordmark" href="{{ url_for('support_admin') }}">emu industries.</a><span>Malware Tracker</span>
+      </div>
+      <div class="reference-search">
+        <label class="visually-hidden" for="reference-search">Search reference</label>
+        <input id="reference-search"
+               type="search"
+               maxlength="32"
+               placeholder="Search reference"
+               autocomplete="off"
+               spellcheck="false">
+      </div>
+      <div class="review-header-actions">
+        <span id="queue-status" role="status">Connecting…</span>
+        <form action="{{ url_for('support_logout') }}" method="post">
+          <input type="hidden" name="csrf" value="{{ session.review_csrf }}">
+          <button class="plain" type="submit">Sign out</button>
+        </form>
+      </div>
+    </header>
+    <nav class="queue-tabs" aria-label="Submission queue">
+      <button type="button" id="queue-tab" aria-pressed="true">
+        Queue (manual review) <span id="queue-count">0</span>
+      </button>
+      <button type="button" id="rejected-tab" aria-pressed="false">
+        REJECTED <span id="rejected-count">0</span>
+      </button>
+      <button type="button" id="accepted-tab" aria-pressed="false">
+        ACCEPTED <span id="accepted-count">0</span>
+      </button>
+    </nav>
+    <main class="review-workspace">
+      <aside class="review-sidebar" aria-label="Submissions">
+        <div id="queue-list"></div>
+        <button id="load-more" class="plain load-more" hidden>Load more</button>
+      </aside>
+      <section class="review-detail">
+        <div id="review-empty" class="review-empty">Select a submission</div>
+        <article id="submission" hidden>
+          <div id="recommendation" class="recommendation" hidden>
+            <strong id="recommendation-label"></strong><span id="screening-score"></span>
+          </div>
+          <div class="submission-title">
+            <h1 id="mail-subject"></h1>
+            <div class="downloads">
+              <a id="download-email" class="action">.eml ↓</a><a id="download-zip" class="action">Attachments ZIP ↓</a>
+            </div>
+          </div>
+          <div class="report-facts">
+            <span><b>From</b> <span id="mail-from"></span></span><span id="mail-time"></span><span id="mail-ip"></span>
+          </div>
+          <div class="report-facts">
+            <span><b>Reference</b> <code id="mail-reference"></code></span>
+          </div>
+          <div class="review-outcome">
+            <label for="mail-state">State</label>
+            <select id="mail-state">
+              {% for value, label in states.items() %}
+                <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+            <button type="button" id="save-state">Save</button>
+            <span id="save-status" role="status"></span>
+          </div>
+          <section class="screening-section">
+            <div class="section-heading">
+              <h2>Screening</h2>
+              <div class="screening-legend">
+                <span class="mail-tag" data-severity="informational">INFORMATIONAL</span><span class="mail-tag" data-severity="malicious">MALICIOUS</span>
+              </div>
+            </div>
+            <div id="mail-tags" class="tags"></div>
+            <div id="score-chart"
+                 class="score-chart"
+                 tabindex="0"
+                 role="img"
+                 aria-label="Email, attachment and combined scores"></div>
+            <details id="screening-details">
+              <summary>Score breakdown</summary>
+              {# Keep this empty for the :empty CSS selector until JavaScript adds reasons. #}
+              {# djlint:off #}
+              <ul id="mail-reasons"></ul>
+              {# djlint:on #}
+            </details>
+          </section>
+          <section class="comment-section">
+            <label for="review-comment">Comment</label>
+            <textarea id="review-comment" rows="2" maxlength="{{ comment_limit }}"></textarea>
+            <div>
+              <button type="button" id="save-comment">Save comment</button>
+              <span id="comment-status" role="status"></span>
+            </div>
+          </section>
+          <section class="email-section">
+            <div class="section-heading">
+              <h2>Email</h2>
+              <button type="button" id="source-toggle" class="plain" aria-pressed="false">HTML source</button>
+            </div>
+            <iframe id="mail-preview"
+                    title="Email contents"
+                    sandbox=""
+                    referrerpolicy="no-referrer"></iframe><pre id="mail-source" hidden></pre>
+          </section>
+          <section class="attachment-section">
+            <h2>Attachments</h2>
+            <div id="mail-files"></div>
+          </section>
+        </article>
+      </section>
+    </main>
+    <div id="review-notice" role="status" class="review-notice" hidden></div>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+{{ define "body_class" }}app-layout{{ end }}
+
+<nav>
+  <a class="nav-brand" href="/user/me">DuckDuckGo</a>
+  <div class="nav-links">
+    <a href="/user/me" class="active">Profile</a>
+    <a href="/scans">Scans</a>
+    <a href="/scans/settings">Settings</a>
+    <a href="/logout" class="nav-logout">Sign Out</a>
+  </div>
+</nav>
+
+<main>
+  <div class="page-header">
+    <h1>My Profile</h1>
+    <p>Manage your account details and subscription.</p>
+  </div>
+
+  {{if .Flash}}
+  <div class="flash">{{.Flash}}</div>
+  {{end}}
+
+  {{if .Errors}}
+  <ul class="errors">
+      {{if eq (printf "%T" .Errors) "string"}}
+          <li>{{.Errors}}</li>
+      {{else}}
+          {{range .Errors}}<li>{{.}}</li>{{end}}
+      {{end}}
+  </ul>
+  {{end}}
+
+  <!-- Account overview -->
+  <div class="section">
+    <div class="section-title">Account</div>
+    <table class="tbl">
+      <tr>
+        <td style="color:var(--ink-soft);width:140px;font-size:0.875rem;">Username</td>
+        <td><strong>{{.Username}}</strong></td>
+      </tr>
+      <tr>
+        <td style="color:var(--ink-soft);font-size:0.875rem;">Subscription</td>
+        <td>
+          {{if .IsSub}}
+          <span class="badge badge-green">Active</span>
+          {{else}}
+          <span class="badge badge-gray">No plan</span>
+          {{end}}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Change password -->
+  <div class="section">
+    <div class="section-title">Change Password</div>
+    <form method="POST" action="/user/update-password">
+      <div class="field">
+        <label for="origpass">Current Password</label>
+        <input type="password" id="origpass" name="origpass" placeholder="••••••••" required>
+      </div>
+      <div class="field">
+        <label for="newpass">New Password</label>
+        <input type="password" id="newpass" name="newpass" placeholder="••••••••" required>
+        <p class="hint">Use at least 8 characters.</p>
+      </div>
+      <button class="btn" type="submit">Update Password</button>
+    </form>
+  </div>
+
+  <!-- Danger zone -->
+  <div class="section">
+    <div class="section-title">Danger Zone</div>
+    <p style="font-size:0.875rem;color:var(--ink-soft);margin-bottom:1rem;">
+      Permanently delete your account and all associated data. This cannot be undone.
+    </p>
+    <form method="POST" action="/user/delete"
+      onsubmit="return confirm('Are you sure? This will permanently delete your account.')">
+      <input type="hidden" name="_method" value="DELETE">
+      <button class="btn btn-danger" type="submit">Delete My Account</button>
+    </form>
+  </div>
+</main>

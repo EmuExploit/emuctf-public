@@ -1,0 +1,14 @@
+import os
+
+FLAG = os.environ.get('FLAG', '')
+PLATFORM_ACCESS_KEY = os.environ.get('PLATFORM_ACCESS_KEY', '')
+SESSION_SECRET = os.environ.get('SESSION_SECRET', '')
+MATTERMOST_API_URL = 'http://mattermost:8065/chat/api/v4'
+MATTERMOST_RUNTIME_FILE = '/tmp/corporate/runtime.json'
+FRONTEND_RUNTIME_FILE = '/tmp/corporate-web/runtime.json'
+SESSION_SETTINGS = {'SESSION_COOKIE_HTTPONLY': True, 'SESSION_COOKIE_SAMESITE': 'Lax'}
+MAX_FILE_BYTES = 20 * 1024 * 1024
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
+MAX_UPLOAD_REQUEST_BYTES = MAX_UPLOAD_BYTES + 1024 * 1024
+LOG_MAX_BYTES = 10 * 1024 * 1024
+LOG_BACKUPS = 5

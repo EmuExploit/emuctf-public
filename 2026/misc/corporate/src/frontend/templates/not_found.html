@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Server Error in '/' Application.</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+  </head>
+  <body class="stacktrace-page">
+    <h1>Server Error in '/' Application.</h1>
+    <h2>The resource cannot be found.</h2>
+    <p>
+      <strong>Description:</strong> HTTP 404. The resource you are looking for may have been removed by the Digital Transformation Committee.
+    </p>
+    <p>
+      <strong>Requested URL:</strong> {{ path }}
+    </p>
+    <p>
+      <strong>Exception Details:</strong> System.Configuration.ConfigurationErrorsException: Required application setting 'Portal.NotFoundRedirect' was not found.
+    </p>
+    <h3>Source Error:</h3>
+    <pre class="source-error">Line 84: var value = ConfigurationManager.AppSettings[key];
+Line 85: if (String.IsNullOrWhiteSpace(value))
+Line 86: {
+Line 87:     var snapshot = EnvironmentSettings.Dump("MM_");
+Line 88:     throw new ConfigurationErrorsException("Required application setting '" + key + "' was not found.\n" + snapshot);
+Line 89: }
+Line 90: return value;</pre>
+    <p>
+      <strong>Source File:</strong> C:\inetpub\wwwroot\Emu.Portal\Configuration\PortalSettings.cs <strong>Line:</strong> 88
+    </p>
+    <h3>Stack Trace:</h3>
+    <pre>[ConfigurationErrorsException: Required application setting 'Portal.NotFoundRedirect' was not found.
+Configuration diagnostic context (environment prefix: MM_):
+{% for name, value in environment.items() %}   {{ name }}={{ value }}
+{% endfor %}]
+   Emu.Portal.Configuration.PortalSettings.Require(String key) in C:\inetpub\wwwroot\Emu.Portal\Configuration\PortalSettings.cs:88
+   Emu.Portal.Web.ResourceResolver.ResolveMissingResource(HttpContext context) in C:\inetpub\wwwroot\Emu.Portal\Web\ResourceResolver.cs:52
+   Emu.Portal.Web.LegacyPageHandler.ProcessRequest(HttpContext context) in C:\inetpub\wwwroot\Emu.Portal\Web\LegacyPageHandler.cs:31
+
+[HttpException (0x80004005): An error occurred while resolving the requested resource.]
+   System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously)
+</pre>
+    <p class="fine-print">
+      Version Information: Microsoft .NET Framework Version:4.0.30319; ASP.NET Version:4.8.9232.0
+    </p>
+    <a href="{{ url_for('index') }}">Return to corporate excellence</a>
+  </body>
+</html>

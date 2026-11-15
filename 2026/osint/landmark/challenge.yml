@@ -1,0 +1,29 @@
+static: true
+data:
+  name: landmark
+  category: osint
+  tags:
+    - easy
+  author: mc fat monke
+  description: |
+    We have compromised MC Fat Monke's phone, who is wanted for establishing a banana republic to feed himself. Can you identify the nearest landmark where this photo was taken?
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{Jägertor}
+    - provider: flags/static
+      config:
+        flag: EMU{Jägertor Potsdam}
+    - provider: flags/static
+      config:
+        flag: EMU{Jaegertor}
+    - provider: flags/static
+      config:
+        flag: EMU{Jaegartor Potsdam}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

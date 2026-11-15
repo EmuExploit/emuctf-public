@@ -1,0 +1,8 @@
+- Based off Challenge name and the contents of the `challenge.con` file, google `EmuCon cmd` to find the terminal emulator called `ConEmu`.
+  - `challenge.con` is a screen dump that was taken via `Debug -> Dump screen...`.
+  - `input.csv` is an input (Keyboard and mouse) log that was taken via `Settings... -> Info -> Debug -> Input`.
+- `Debug -> Load scren dump...` and load `challenge.con`
+- Copy the loaded buffer with colour infomation so it can be processed. `Edit -> Copy as HTML` to copy buffer as HTML. Save this to a text file.
+  - Note: During testing, this functionality appears to be bugged and would copy as plaintext most of the time, despite `Copy as HTML` been set. As a workaround, we can go into `Settings... -> Keys & Macrco -> Macros` and create a custom macro to copy selection as HTML with `Copy(1,2)`. Otherwise, try copying each line/section until it gives HTML output.
+- Write a Python script to replay the input log csv file against the extracted buffer, making sure the colour information is retained.
+- The flag is written in one of the colours.

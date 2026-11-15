@@ -1,0 +1,3 @@
+- `Right click -> Properties -> Details` - Identify that the game was made in GameMaker.
+- Search for GameMaker decompilers, find https://github.com/UnderminersTeam/UndertaleModTool or equivalent.
+- Decompile `data.win`, the flag is in the `rm_wip` room.

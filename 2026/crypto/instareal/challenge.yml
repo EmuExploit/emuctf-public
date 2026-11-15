@@ -1,0 +1,32 @@
+data:
+  name: instareal
+  category: crypto
+  tags:
+    - medium
+    - web
+  author: Panc4kes
+  description: |
+    I lost my favourite real. Can you help me find it?
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{1_h0p3_th4t_w45n7_4_r34l_ch4ll3ng3_f0r_y0u}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  instancerConfig:
+    challengeIntegrationId: instareal
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: http
+        hostPrefix: instareal
+        containerName: app
+        containerPort: 8080
+        shouldDisplay: true
+        title: Open challenge
+  sortWeight: 30
+  hidden: false
+  releaseTime: null

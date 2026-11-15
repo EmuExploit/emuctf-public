@@ -1,0 +1,17 @@
+from shared_config import FLAG as FLAG
+from shared_config import PLATFORM_ACCESS_KEY as PLATFORM_ACCESS_KEY
+from shared_config import SESSION_SECRET as SESSION_SECRET
+from shared_config import SESSION_SETTINGS as SESSION_SETTINGS
+
+MATTERMOST_WEBHOOK_URL = ''
+MAX_CONTENT_LENGTH = 12 * 1024 * 1024
+CONTACT_MAX_BYTES = 8192
+CONTACT_GLOBAL_INTERVAL_SECONDS = 2
+CONTACT_REQUESTS_PER_MINUTE = 3
+CONTACT_MAX_CLIENTS = 4096
+
+bind = '0.0.0.0:8080'
+workers = 1
+threads = 8
+accesslog = '-'
+errorlog = '-'

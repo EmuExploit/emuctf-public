@@ -1,0 +1,20 @@
+static: true
+data:
+  name: hermes-gets-twitchy
+  category: rev
+  tags:
+    - medium
+  author: nullableVoidPtr
+  description: |
+    I'm sick and tired of people beautifying my JavaScript and stealing my secrets! This binary thing will show them!!
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{c4n7_chuck_this_into_gh1dr4}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

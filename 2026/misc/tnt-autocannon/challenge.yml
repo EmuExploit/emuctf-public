@@ -1,0 +1,22 @@
+static: true
+data:
+  name: tnt-autocannon
+  category: misc
+  tags:
+    - easy
+  author: Panc4kes
+  description: |
+    I'm going to show you how to make the most powerful autocannon in Minecraft. This TNT cannon shoots almost 100 TNT per second. First place 9 dispensors like this and then 3 more blocks going out on each side, then put ladders on them and then put slabs in the middle and then put a 2 high row of dispensers on each one. Then you want to cover the TNT cannon with wool and then place water on the inside so it doesn't blow up. Now you want to create a overhang of dispensers on both sides, so 3 dispensers. Now you want to put redstone all over all the dispensers except the ones that are uh going to fire. You want to be careful not to connect the redstone the the uh dispensers or else they'll blow your cannon up, so just leave a gap of redstone there. Now you want to make a redstone clock by using a comparator thing around and make sure to change the comparator so its on subtract mode. Now start the cannon and place redstone dust and it'll begin firing. Thanks for watching.
+
+    Note: The flag is not in the `EMU{}` format, but it will be obvious. When submitting, wrap the flag in `EMU{}` and replace all whitespace with underscores.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{CPU_GO_BRR_AND_BOOM!}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

@@ -1,0 +1,34 @@
+data:
+  name: duck-duck-go
+  category: web
+  tags:
+    - insane
+  author: mc fat monke
+  description: |
+    duck duck go my scanner
+
+    > [!WARNING]
+    > Solve locally before attempting remote
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{be3gOo0N3_b4D_sQl1T3_wR1t35!!1!one1}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  instancerConfig:
+    challengeIntegrationId: duck-duck-go
+    instancer: docker
+    timeoutMilliseconds: 600000
+    extendable: true
+    expose:
+      - kind: http
+        hostPrefix: duck-duck-go
+        containerName: app
+        containerPort: 8080
+        shouldDisplay: true
+        title: Open challenge
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

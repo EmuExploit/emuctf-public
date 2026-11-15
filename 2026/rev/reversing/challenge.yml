@@ -1,0 +1,20 @@
+static: true
+data:
+  name: reversing
+  category: rev
+  tags:
+    - beginner
+  author: toasterpwn
+  description: |
+    Rev is short for reversing.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{resrever}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

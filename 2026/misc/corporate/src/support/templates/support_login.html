@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Malware Tracker / Emu Industries</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='mail.css') }}">
+  </head>
+  <body class="review-login">
+    <main>
+      <a class="mail-wordmark" href="{{ url_for('support_login') }}">emu industries.</a>
+      <h1>Malware Tracker</h1>
+      {% if error %}<p role="alert">{{ error }}</p>{% endif %}
+      <form method="post">
+        <input type="hidden" name="csrf" value="{{ session.review_csrf }}">
+        <label for="password">Password</label>
+        <input id="password"
+               name="password"
+               type="password"
+               autocomplete="current-password"
+               required
+               autofocus>
+        <button type="submit">Sign in ↗</button>
+      </form>
+    </main>
+  </body>
+</html>

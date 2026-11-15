@@ -1,0 +1,26 @@
+static: true
+data:
+  name: weight-a-minute
+  category: forensics
+  tags:
+    - medium
+  author: Div
+  description: |
+    Something's not adding up at EMU Industries' Red Dune site! An
+    overweight alert has brought their shipment to a halt. Can you track
+    down the interlock reference ID?
+
+    Download the capture: https://drive.google.com/file/d/14Y1dlLn6S30tBfe-35-RMp50GZSOnjaD/view?usp=sharing
+
+    Submit: EMU{decoded_value}.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{RDN_REE_02_OVERWEIGHT_INTLK_07_4D7A92C1}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 30
+  hidden: false
+  releaseTime: null

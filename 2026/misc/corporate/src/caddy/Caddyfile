@@ -1,0 +1,80 @@
+{
+    servers {
+        timeouts {
+            read_header 5s
+            read_body 60s
+            idle 2m
+        }
+    }
+    log default {
+        output file /logs/runtime.log {
+            roll_size 10MiB
+            roll_keep 5
+        }
+        format json
+    }
+}
+
+(auth_enabled) {
+    basic_auth {
+        {$BASIC_AUTH_USER:tester} {$BASIC_AUTH_HASH}
+    }
+    # Remove the testing gate credential, preserving API auth when gate is disabled.
+    request_header -Authorization
+}
+(auth_disabled) {
+}
+
+{$SITE_ADDRESS} {
+    log {
+        output file /logs/access.log {
+            roll_size 10MiB
+            roll_keep 5
+        }
+        format json
+    }
+    route {
+        import auth_{$AUTH_MODE:enabled}
+        @reviewer_path path /malware/admin /malware/admin/*
+        respond @reviewer_path 404
+        @chat_root path /chat
+        redir @chat_root /chat/ 308
+        @chat path /chat/*
+        reverse_proxy @chat mattermost:8065
+        # Attachment bodies must never pass through the main site's CDN.
+        @malware path /malware /malware/*
+        respond @malware 404
+        reverse_proxy frontend:8080
+    }
+}
+
+
+{$REVIEW_SITE_ADDRESS:https://review.corporate.ctf.emu.team} {
+    log {
+        output file /logs/reviewer-access.log {
+            roll_size 10MiB
+            roll_keep 5
+        }
+        format json
+    }
+    # Independent reviewer login always applies, even when the testing gate is off.
+    reverse_proxy reviewer:8080
+}
+
+
+{$UPLOAD_SITE_ADDRESS} {
+    log {
+        output file /logs/upload-access.log {
+            roll_size 10MiB
+            roll_keep 5
+        }
+        format json
+    }
+    # Bearer upload authorization replaces the testing Basic Auth gate here;
+    # importing that gate would consume/strip the Authorization header.
+    route {
+        @uploads path /malware /malware/availability
+        reverse_proxy @uploads support:8080
+        respond 404
+    }
+}

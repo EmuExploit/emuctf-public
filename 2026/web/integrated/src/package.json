@@ -1,0 +1,16 @@
+{
+  "name": "emu-most-wanted",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Emu Most Wanted criminal registry (external site + internal API)",
+  "main": "start.js",
+  "scripts": {
+    "start": "node start.js",
+    "init-db": "node db/init.js"
+  },
+  "dependencies": {
+    "axios": "^1.12.2",
+    "better-sqlite3": "^11.10.0",
+    "express": "^5.1.0"
+  }
+}

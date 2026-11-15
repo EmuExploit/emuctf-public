@@ -1,0 +1,19 @@
+services:
+  app:
+    image: ${REGISTRY}/ping:latest
+    build:
+      context: ./src
+    environment:
+      flag: ${FLAG}
+    networks:
+      - internal
+    expose:
+      - "8080"
+    read_only: true
+    mem_limit: 128m
+    cpus: 0.5
+    pids_limit: 128
+
+networks:
+  internal:
+    internal: true

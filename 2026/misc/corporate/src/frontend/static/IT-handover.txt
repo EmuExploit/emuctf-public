@@ -1,0 +1,4 @@
+TODO: remove this file.
+
+Mattermost is now hosted at /chat.
+The platform uses one centralised access key.

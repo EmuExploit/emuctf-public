@@ -1,0 +1,26 @@
+data:
+  name: morehashes
+  category: crypto
+  tags:
+    - easy
+  author: toasterpwn
+
+  description: |
+    More hashes, more problems.
+
+    Author: toasterpwn
+
+    > [!CONNECTION]
+    > `nc ${host} ${port}`
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{mo_hashes_mo_problems!}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

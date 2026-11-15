@@ -1,0 +1,22 @@
+static: true
+data:
+  name: emu-run
+  category: rev
+  tags:
+    - easy
+  author: Panc4kes
+  description: |
+    To fund their operations, the Emus are developing a new AAA game to sell.
+    
+    It's still work in progress, but here is a beta version for you to try!
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{pl5_8U1ld_7H15_l3v3L_Wh1l3_uR_h3r3}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

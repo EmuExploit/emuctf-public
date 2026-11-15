@@ -1,0 +1,9 @@
+.build/
+linux/
+buildroot/
+__pycache__/
+module/*.o
+module/*.ko
+module/.*.cmd
+module/Module.symvers
+module/modules.order

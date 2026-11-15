@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+    environment:
+      flag: ${FLAG:-EMU{local_test_flag}}
+    ports:
+      - "8080:8080"
+    mem_limit: 1024m
+    cpus: 1.0
+    pids_limit: 256

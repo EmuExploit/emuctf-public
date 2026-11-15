@@ -1,0 +1,27 @@
+static: true
+data:
+  name: i-am-speed
+  category: forensics
+  tags:
+    - medium
+  author: Div
+  description: |
+    One of EMU Industries' conveyors decided to full-on "send it"!
+    Sabotage, an insider threat, or just lazy EMUs? Can you pin down the
+    change reference ID for the anomalous configuration changes behind the
+    incident at Wattle Creek Copper Loadout?
+
+    Download the capture: https://drive.google.com/file/d/14Y1dlLn6S30tBfe-35-RMp50GZSOnjaD/view?usp=sharing
+
+    Submit: EMU{change_reference}
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{HTTP_SPEED_SET_300_PERCENT_91D4A7C2}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 40
+  hidden: false
+  releaseTime: null

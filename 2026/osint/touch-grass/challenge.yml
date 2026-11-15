@@ -1,0 +1,20 @@
+static: true
+data:
+  name: touch-grass
+  category: osint
+  tags:
+    - hard
+  author: toasterpwn
+  description: |
+    Figure out where we are, and take your own team photo there! Open a ticket and send us the picture, and you will receive a flag.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{t0uch1ng_gr4ss_1s_g00d_f0r_CTFing!}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

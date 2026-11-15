@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% block content %}
+  <section class="page-heading">
+    <p class="label">Pricing</p>
+    <h1>
+      Upgrade your team.
+      <br>
+      Improve your ranking.
+    </h1>
+    <p>
+      Get earlier challenge access, higher scores and exclusive solution access with a paid team subscription.
+    </p>
+  </section>
+  <section class="pricing-section" aria-labelledby="plans-heading">
+    <h2 id="plans-heading">Compare team plans.</h2>
+    <p class="fine-print" id="pricing-scroll-hint">
+      Prices are in AUD per team, billed monthly. Scroll to compare plans on smaller screens.
+    </p>
+    <div class="pricing-scroll"
+         role="region"
+         aria-label="CTF subscription comparison"
+         aria-describedby="pricing-scroll-hint"
+         tabindex="0">
+      <table class="pricing-table">
+        <caption>All plans compete on the same leaderboard. Paid benefits apply to ranked challenges.</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="pricing-label">Team benefits</th>
+            <th scope="col">
+              <span class="plan-note">Standard access</span>
+              <span class="plan-name">Free</span>
+              <span class="plan-price">$0<span>/ month</span></span>
+              <span class="plan-summary">Public challenges and standard scoring.</span>
+            </th>
+            <th scope="col" class="recommended-plan">
+              <span class="plan-note">Recommended</span>
+              <span class="plan-name">Competitive</span>
+              <span class="plan-price">$49<span>/ month</span></span>
+              <span class="plan-summary">A head start on every event, with double points for every solve.</span>
+            </th>
+            <th scope="col">
+              <span class="plan-note">Full access</span>
+              <span class="plan-name">Premier</span>
+              <span class="plan-price">$499<span>/ month</span></span>
+              <span class="plan-summary">Full solutions, unlimited flag reveals and guaranteed leaderboard placement.</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Challenge access</th>
+            <td>At public release</td>
+            <td>24 hours before public release</td>
+            <td>72 hours before public release</td>
+          </tr>
+          <tr>
+            <th scope="row">Points per solve</th>
+            <td>1× base points</td>
+            <td>2× base points</td>
+            <td>5× base points</td>
+          </tr>
+          <tr>
+            <th scope="row">Hints</th>
+            <td>Public hints only</td>
+            <td>All hints unlocked immediately</td>
+            <td>All hints plus private author guidance</td>
+          </tr>
+          <tr>
+            <th scope="row">Hint penalties</th>
+            <td>Deducted from your score</td>
+            <td>No deductions</td>
+            <td>No deductions</td>
+          </tr>
+          <tr>
+            <th scope="row">AI / LLM usage</th>
+            <td>Not permitted</td>
+            <td>Permitted for all challenges</td>
+            <td>Permitted, including autonomous solving agents</td>
+          </tr>
+          <tr>
+            <th scope="row">Official writeups</th>
+            <td>After the event</td>
+            <td>Halfway through the event</td>
+            <td>Included with every challenge on release</td>
+          </tr>
+          <tr>
+            <th scope="row">Flag reveals</th>
+            <td>Not included</td>
+            <td>3 per event, awarded full points</td>
+            <td>Unlimited, awarded full points</td>
+          </tr>
+          <tr>
+            <th scope="row">Minimum challenge value</th>
+            <td>Decreases as other teams solve</td>
+            <td>Never below 50% of starting value</td>
+            <td>Always worth full starting value</td>
+          </tr>
+          <tr>
+            <th scope="row">Tiebreak priority</th>
+            <td>Behind paid teams</td>
+            <td>Ahead of Free teams</td>
+            <td>Ahead of all other teams</td>
+          </tr>
+          <tr>
+            <th scope="row">Leaderboard placement</th>
+            <td>Based on score</td>
+            <td>Based on boosted score</td>
+            <td>Guaranteed top 3, regardless of score</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th scope="row">Choose your plan</th>
+            <td>
+              <a class="plan-link" href="{{ url_for('index', _anchor='contact') }}">Join Free ↗</a>
+            </td>
+            <td class="recommended-plan">
+              <a class="plan-link" href="{{ url_for('index', _anchor='contact') }}">Upgrade to Competitive ↗</a>
+            </td>
+            <td>
+              <a class="plan-link" href="{{ url_for('index', _anchor='contact') }}">Upgrade to Premier ↗</a>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+  <section class="prose pricing-fineprint">
+    <h2>Subscription details.</h2>
+    <h3>Do paid benefits apply to ranked events?</h3>
+    <p>
+      Yes. Score multipliers, flag reveals and placement guarantees apply to the main event leaderboard. Paid and Free teams compete in the same division.
+    </p>
+    <h3>Can my team use AI or LLM tools?</h3>
+    <p>
+      AI and LLM tools are prohibited on the Free plan, including code assistants, chatbots and agents. Competitive and Premier teams may use them to analyse challenges and generate solutions. Premier also permits autonomous solving agents.
+    </p>
+    <h3>When does an upgrade take effect?</h3>
+    <p>
+      Benefits activate immediately. Existing solves are recalculated using your new score multiplier, including flags obtained through reveals.
+    </p>
+    <h3>Does early access count towards first blood?</h3>
+    <p>
+      Yes. Solves submitted before public release qualify for first-blood bonuses. Free teams receive access at the scheduled event start.
+    </p>
+    <p class="fine-print">
+      Subscriptions renew monthly. Benefits apply to every member of the subscribed team. Premier placement is reserved before score-based positions are assigned.
+    </p>
+  </section>
+{% endblock %}

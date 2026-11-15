@@ -1,0 +1,24 @@
+static: true
+data:
+  name: rex
+  category: phys
+  tags:
+    - medium
+  author: evildaemond
+  description: |
+    Our new EMU Industries headquarters has some really nice state of the art security, including the doors in front of our office.
+    We made it so if you're inside you can press a button and the doors open, but if you're outside you need to swipe our high security badges. 
+    It's really secure, not like you're able to press the button on the outside.
+
+    To get the flag, you need to press the button from the outside, then the flag will be shown on the screen outside the box.
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{flags_for_days}
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 100
+  hidden: false
+  releaseTime: null

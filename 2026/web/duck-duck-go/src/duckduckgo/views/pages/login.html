@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="logo">DuckDuckGo</div>
+  <div class="tagline">Sign in to your account</div>
+
+  {{if .Flash}}
+  <div class="flash">{{.Flash}}</div>
+  {{end}}
+
+  {{if .Errors}}
+  <ul class="errors">
+      {{if eq (printf "%T" .Errors) "string"}}
+          <li>{{.Errors}}</li>
+      {{else}}
+          {{range .Errors}}<li>{{.}}</li>{{end}}
+      {{end}}
+  </ul>
+  {{end}}
+
+  <form method="POST" action="/login">
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="username" id="username" name="username" value="{{.Username}}" placeholder="Username" required>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" required>
+    </div>
+    <button class="btn" type="submit">Sign In</button>
+  </form>
+
+  <div class="foot">
+    No account? <a href="/register">Create one</a>
+  </div>
+</div>

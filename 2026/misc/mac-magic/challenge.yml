@@ -1,0 +1,26 @@
+static: true
+data:
+  name: mac-magic
+  category: misc
+  tags:
+    - easy
+  author: TheSavageTeddy
+
+  description: |
+    if you've used a mac before, you would've definetly seen .DS_Store file somewhere.
+
+    but can it fit a flag?
+
+    Author: TheSavageTeddy
+  flags:
+    - provider: flags/static
+      config:
+        flag: EMU{DS_1s_1337}
+
+  points:
+    min: 100
+    max: 500
+  tiebreakEligible: true
+  sortWeight: 10
+  hidden: false
+  releaseTime: null

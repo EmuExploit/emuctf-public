@@ -1,0 +1,20 @@
+services:
+  app:
+    image: ${REGISTRY}/xss-bot:latest
+    build:
+      context: ./src
+    networks:
+      - internal
+    expose:
+      - "8080"
+    read_only: true
+    tmpfs:
+      /tmp: "rw,size=128m"
+    shm_size: "64m"
+    mem_limit: 1g
+    cpus: 1.0
+    pids_limit: 512
+
+networks:
+  internal:
+    internal: false
